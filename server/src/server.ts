@@ -47,7 +47,22 @@ app.use('/api/notifications', notificationRoutes);
 
 // Serve static files in production
 if (config.nodeEnv === 'production') {
-  const clientBuildPath = path.join(__dirname, '../../client/dist');
+  // Try multiple possible paths for the client build
+  const possiblePaths = [
+    path.join(__dirname, '../../client/dist'),           // From server/dist
+    path.join(process.cwd(), 'client/dist'),             // From project root
+    path.join(__dirname, '../../../client/dist'),        // Alternative path
+  ];
+
+  let clientBuildPath = possiblePaths[0];
+  for (const testPath of possiblePaths) {
+    if (require('fs').existsSync(path.join(testPath, 'index.html'))) {
+      clientBuildPath = testPath;
+      console.log(`✅ Found client build at: ${clientBuildPath}`);
+      break;
+    }
+  }
+
   app.use(express.static(clientBuildPath));
 
   // Handle React Router - send all non-API requests to index.html
