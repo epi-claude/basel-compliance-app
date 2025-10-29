@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fields xmlns:xfdf="http://ns.adobe.com/xfdf-transition/">
+<_disposal_recovery_facility_type_disposal xfdf:original="10_disposal_recovery_facility_type_disposal">Off</_disposal_recovery_facility_type_disposal>
+<_disposal_recovery_facility_type_recovery xfdf:original="10_disposal_recovery_facility_type_recovery">Off</_disposal_recovery_facility_type_recovery>
+<_specific_condition_no xfdf:original="20_specific_condition_no">Off</_specific_condition_no>
+<_specific_condition_yes xfdf:original="20_specific_condition_yes">Off</_specific_condition_yes>
+<_notification_details_individual_shipment xfdf:original="3_notification_details_individual_shipment">Off</_notification_details_individual_shipment>
+<_notification_details_multiple_shipments xfdf:original="3_notification_details_multiple_shipments">Off</_notification_details_multiple_shipments>
+<_notification_details_operation_type_disposal xfdf:original="3_notification_details_operation_type_disposal">Off</_notification_details_operation_type_disposal>
+<_notification_details_operation_type_recovery xfdf:original="3_notification_details_operation_type_recovery">Off</_notification_details_operation_type_recovery>
+<_notification_details_pre_consented_recovery_facility_no xfdf:original="3_notification_details_pre_consented_recovery_facility_no">Off</_notification_details_pre_consented_recovery_facility_no>
+<_notification_details_pre_consented_recovery_facility_yes xfdf:original="3_notification_details_pre_consented_recovery_facility_yes">Off</_notification_details_pre_consented_recovery_facility_yes>
+<_special_handling_no xfdf:original="7_special_handling_no">Off</_special_handling_no>
+<_special_handling_yes xfdf:original="7_special_handling_yes">Off</_special_handling_yes>
+</fields>

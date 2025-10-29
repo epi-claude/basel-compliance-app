@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basel Convention Notification Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-section {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            background: #343a40;
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-content {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .field-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        input, textarea, select {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+        
+        select {
+            background-color: white;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+        
+        select[multiple] {
+            background-image: none;
+            padding-right: 10px;
+            height: auto;
+            min-height: 120px;
+        }
+        
+        select[multiple] option {
+            padding: 8px;
+            margin: 2px 0;
+        }
+        
+        select[multiple] option:checked {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        
+        .packaging-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        .progress-container {
+            background: #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            background: #dee2e6;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #28a745, #20c997);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            text-align: center;
+            font-weight: bold;
+            color: #495057;
+        }
+        
+        @media (max-width: 768px) {
+            .section-content {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .packaging-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌍 Basel Convention Notification Form</h1>
+            <p>Enhanced with AI-powered assistance for accurate compliance</p>
+            <button type="button" class="btn btn-primary" onclick="loadSampleData()" style="margin-top: 15px; background: #28a745; border: none;">
+                📋 Load Sample E-Waste Export Data
+            </button>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="progress-text" id="progressText">0% Complete</span>
+        </div>
+
+        <form id="baselForm">
+            <!-- Section 1: Exporter -->
+            <div class="form-section">
+                <div class="section-header">
+                    1. Exporter - Notifier
+                </div>
+                <div class="section-content">
+                    <div class="field-group">
+                        <label for="exporter_reg">Registration No:</label>
+                        <input type="text" id="exporter_reg" name="exporter_reg" required>
+                    </div>
+                    <div class="field-group">
+                        <label for="exporter_name">Name:</label>
+                        <input type="text" id="exporter_name" name="exporter_name" required>
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="exporter_address">Address:</label>
+                        <textarea id="exporter_address" name="exporter_address" rows="3" required></textarea>
+                    </div>
+                    <div class="field-group">
+                        <label for="exporter_contact">Contact person:</label>
+                        <input type="text" id="exporter_contact" name="exporter_contact">
+                    </div>
+                    <div class="field-group">
+                        <label for="exporter_phone">Tel:</label>
+                        <input type="tel" id="exporter_phone" name="exporter_phone">
+                    </div>
+                    <div class="field-group">
+                        <label for="exporter_fax">Fax:</label>
+                        <input type="tel" id="exporter_fax" name="exporter_fax">
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="exporter_email">E-mail:</label>
+                        <input type="email" id="exporter_email" name="exporter_email">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Importer -->
+            <div class="form-section">
+                <div class="section-header">
+                    2. Importer - Consignee
+                </div>
+                <div class="section-content">
+                    <div class="field-group">
+                        <label for="importer_reg">Registration No:</label>
+                        <input type="text" id="importer_reg" name="importer_reg" required>
+                    </div>
+                    <div class="field-group">
+                        <label for="importer_name">Name:</label>
+                        <input type="text" id="importer_name" name="importer_name" required>
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="importer_address">Address:</label>
+                        <textarea id="importer_address" name="importer_address" rows="3" required></textarea>
+                    </div>
+                    <div class="field-group">
+                        <label for="importer_contact">Contact person:</label>
+                        <input type="text" id="importer_contact" name="importer_contact">
+                    </div>
+                    <div class="field-group">
+                        <label for="importer_phone">Tel:</label>
+                        <input type="tel" id="importer_phone" name="importer_phone">
+                    </div>
+                    <div class="field-group">
+                        <label for="importer_fax">Fax:</label>
+                        <input type="tel" id="importer_fax" name="importer_fax">
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="importer_email">E-mail:</label>
+                        <input type="email" id="importer_email" name="importer_email">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Notification Details -->
+            <div class="form-section">
+                <div class="section-header">
+                    3. Notification Details
+                </div>
+                <div class="section-content">
+                    <div class="field-group">
+                        <label for="notification_no">Notification No:</label>
+                        <input type="text" id="notification_no" name="notification_no" placeholder="Will be assigned">
+                    </div>
+                    <div class="field-group">
+                        <label>Notification concerning:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="individual_shipment" name="shipment_type" value="individual">
+                                <label for="individual_shipment">Individual shipment</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="multiple_shipments" name="shipment_type" value="multiple">
+                                <label for="multiple_shipments">Multiple shipments</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <label>Operation type:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="disposal" name="operation_type" value="disposal">
+                                <label for="disposal">Disposal</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="recovery" name="operation_type" value="recovery">
+                                <label for="recovery">Recovery</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <label>Pre-consented recovery facility:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="preconsent_yes" name="preconsent" value="yes">
+                                <label for="preconsent_yes">Yes</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="preconsent_no" name="preconsent" value="no">
+                                <label for="preconsent_no">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Total Intended Number of Shipments -->
+            <div class="form-section">
+                <div class="section-header">
+                    4. Total Intended Number of Shipments
+                </div>
+                <div class="section-content">
+                    <div class="field-group">
+                        <label for="total_shipments">Total intended number of shipments:</label>
+                        <input type="number" id="total_shipments" name="total_shipments" min="1" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Total Intended Quantity -->
+            <div class="form-section">
+                <div class="section-header">
+                    5. Total Intended Quantity
+                </div>
+                <div class="section-content">
+                    <div class="field-group">
+                        <label for="quantity_tonnes">Tonnes (Mg):</label>
+                        <input type="number" id="quantity_tonnes" name="quantity_tonnes" step="0.001" min="0">
+                    </div>
+                    <div class="field-group">
+                        <label for="quantity_cubic">m³:</label>
+                        <input type="number" id="quantity_cubic" name="quantity_cubic" step="0.001" min="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: Intended Period of Time for Shipments -->
+            <div class="form-section">
+                <div class="section-header">
+                    6. Intended Period of Time for Shipment(s)
+                </div>
+                <div class="section-content">
+                    <div class="field-group">
+                        <label for="first_departure">First departure:</label>
+                        <input type="date" id="first_departure" name="first_departure" required>
+                    </div>
+                    <div class="field-group">
+                        <label for="last_departure">Last departure:</label>
+                        <input type="date" id="last_departure" name="last_departure" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 7: Packaging Types and Special Handling -->
+            <div class="form-section">
+                <div class="section-header">
+                    7. Packaging Type(s) and Special Handling
+                </div>
+                <div class="section-content">
+                    <div class="field-group full-width">
+                        <label>Packaging type(s) - Select all that apply:</label>
+                        <div class="checkbox-group packaging-grid" style="margin-top: 10px;">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="drum" name="packaging_types" value="1">
+                                <label for="drum">1. Drum</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="wooden_barrel" name="packaging_types" value="2">
+                                <label for="wooden_barrel">2. Wooden barrel</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="jerrican" name="packaging_types" value="3">
+                                <label for="jerrican">3. Jerrican</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="box" name="packaging_types" value="4">
+                                <label for="box">4. Box</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="bag" name="packaging_types" value="5">
+                                <label for="bag">5. Bag</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="composite" name="packaging_types" value="6">
+                                <label for="composite">6. Composite packaging</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="pressure_receptacle" name="packaging_types" value="7">
+                                <label for="pressure_receptacle">7. Pressure receptacle</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="bulk" name="packaging_types" value="8">
+                                <label for="bulk">8. Bulk</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="other_packaging" name="packaging_types" value="9">
+                                <label for="other_packaging">9. Other (specify)</label>
+                            </div>
+                        </div>
+                        <div class="field-group full-width" id="other_packaging_details" style="display: none; margin-top: 15px;">
+                            <label for="other_packaging_specify">If Other, please specify:</label>
+                            <input type="text" id="other_packaging_specify" name="other_packaging_specify" placeholder="Describe other packaging type">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <label>Special handling requirements:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="special_handling_yes" name="special_handling" value="yes">
+                                <label for="special_handling_yes">Yes</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="special_handling_no" name="special_handling" value="no">
+                                <label for="special_handling_no">No</label>
+                            </div>
+                        </div>
+                        <div class="field-group full-width" id="special_handling_details" style="display: none; margin-top: 15px;">
+                            <label for="special_handling_specify">Special handling requirements details:</label>
+                            <textarea id="special_handling_specify" name="special_handling_specify" rows="3" placeholder="Describe specific handling requirements"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 8: Intended Carrier(s) -->
+            <div class="form-section">
+                <div class="section-header">
+                    8. Intended Carrier(s)
+                </div>
+                <div class="section-content">
+                    <div class="field-group">
+                        <label for="carrier_reg">Registration No:</label>
+                        <input type="text" id="carrier_reg" name="carrier_reg">
+                    </div>
+                    <div class="field-group">
+                        <label for="carrier_name">Name:</label>
+                        <input type="text" id="carrier_name" name="carrier_name" required>
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="carrier_address">Address:</label>
+                        <textarea id="carrier_address" name="carrier_address" rows="3" required></textarea>
+                    </div>
+                    <div class="field-group">
+                        <label for="carrier_contact">Contact person:</label>
+                        <input type="text" id="carrier_contact" name="carrier_contact">
+                    </div>
+                    <div class="field-group">
+                        <label for="carrier_phone">Tel:</label>
+                        <input type="tel" id="carrier_phone" name="carrier_phone">
+                    </div>
+                    <div class="field-group">
+                        <label for="carrier_fax">Fax:</label>
+                        <input type="tel" id="carrier_fax" name="carrier_fax">
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="carrier_email">E-mail:</label>
+                        <input type="email" id="carrier_email" name="carrier_email">
+                    </div>
+                    <div class="field-group">
+                        <label>Means of transport:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="transport_road" name="transport_means" value="R">
+                                <label for="transport_road">R - Road</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="transport_train" name="transport_means" value="T">
+                                <label for="transport_train">T - Train/Rail</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="transport_sea" name="transport_means" value="S">
+                                <label for="transport_sea">S - Sea</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="transport_air" name="transport_means" value="A">
+                                <label for="transport_air">A - Air</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="transport_waterway" name="transport_means" value="W">
+                                <label for="transport_waterway">W - Inland waterways</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 9: Waste Generator(s) - Producer(s) -->
+            <div class="form-section">
+                <div class="section-header">
+                    9. Waste Generator(s) - Producer(s)
+                </div>
+                <div class="section-content">
+                    <div class="field-group">
+                        <label for="generator_reg">Registration No:</label>
+                        <input type="text" id="generator_reg" name="generator_reg">
+                    </div>
+                    <div class="field-group">
+                        <label for="generator_name">Name:</label>
+                        <input type="text" id="generator_name" name="generator_name" required>
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="generator_address">Address:</label>
+                        <textarea id="generator_address" name="generator_address" rows="3" required></textarea>
+                    </div>
+                    <div class="field-group">
+                        <label for="generator_contact">Contact person:</label>
+                        <input type="text" id="generator_contact" name="generator_contact">
+                    </div>
+                    <div class="field-group">
+                        <label for="generator_phone">Tel:</label>
+                        <input type="tel" id="generator_phone" name="generator_phone">
+                    </div>
+                    <div class="field-group">
+                        <label for="generator_fax">Fax:</label>
+                        <input type="tel" id="generator_fax" name="generator_fax">
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="generator_email">E-mail:</label>
+                        <input type="email" id="generator_email" name="generator_email">
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="generation_site">Site and process of generation:</label>
+                        <textarea id="generation_site" name="generation_site" rows="3" placeholder="Describe the specific process or activity that generated the waste"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 10: Disposal/Recovery Facility -->
+            <div class="form-section">
+                <div class="section-header">
+                    10. Disposal/Recovery Facility
+                </div>
+                <div class="section-content">
+                    <div class="field-group full-width">
+                        <label>Facility type:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="disposal_facility" name="facility_type" value="disposal">
+                                <label for="disposal_facility">Disposal facility</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="recovery_facility" name="facility_type" value="recovery">
+                                <label for="recovery_facility">Recovery facility</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <label for="facility_reg">Registration No:</label>
+                        <input type="text" id="facility_reg" name="facility_reg" required>
+                    </div>
+                    <div class="field-group">
+                        <label for="facility_name">Name:</label>
+                        <input type="text" id="facility_name" name="facility_name" required>
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="facility_address">Address:</label>
+                        <textarea id="facility_address" name="facility_address" rows="3" required></textarea>
+                    </div>
+                    <div class="field-group">
+                        <label for="facility_contact">Contact person:</label>
+                        <input type="text" id="facility_contact" name="facility_contact">
+                    </div>
+                    <div class="field-group">
+                        <label for="facility_phone">Tel:</label>
+                        <input type="tel" id="facility_phone" name="facility_phone">
+                    </div>
+                    <div class="field-group">
+                        <label for="facility_fax">Fax:</label>
+                        <input type="tel" id="facility_fax" name="facility_fax">
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="facility_email">E-mail:</label>
+                        <input type="email" id="facility_email" name="facility_email">
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="actual_site">Actual site of disposal/recovery (if different from address):</label>
+                        <textarea id="actual_site" name="actual_site" rows="2" placeholder="Enter if processing site differs from business address"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 11: Disposal/Recovery Operation(s) -->
+            <div class="form-section">
+                <div class="section-header">
+                    11. Disposal/Recovery Operation(s)
+                </div>
+                <div class="section-content">
+                    <div class="field-group">
+                        <label for="operation_code">D-code / R-code:</label>
+                        <select id="operation_code" name="operation_code" required>
+                            <option value="">Select operation code...</option>
+                            <optgroup label="Disposal Operations (D-codes)">
+                                <option value="D1">D1 - Deposit into or onto land (e.g., landfill)</option>
+                                <option value="D2">D2 - Land treatment (e.g., biodegradation in soils)</option>
+                                <option value="D3">D3 - Deep injection (e.g., injection into wells)</option>
+                                <option value="D4">D4 - Surface impoundment (e.g., pits, ponds)</option>
+                                <option value="D5">D5 - Specially engineered landfill</option>
+                                <option value="D6">D6 - Release into water body except seas/oceans</option>
+                                <option value="D7">D7 - Release into seas/oceans</option>
+                                <option value="D8">D8 - Biological treatment not specified elsewhere</option>
+                                <option value="D9">D9 - Physico-chemical treatment not specified elsewhere</option>
+                                <option value="D10">D10 - Incineration on land</option>
+                                <option value="D11">D11 - Incineration at sea</option>
+                                <option value="D12">D12 - Permanent storage</option>
+                                <option value="D13">D13 - Blending or mixing prior to submission to operations</option>
+                                <option value="D14">D14 - Repackaging prior to submission to operations</option>
+                                <option value="D15">D15 - Storage pending any operations</option>
+                            </optgroup>
+                            <optgroup label="Recovery Operations (R-codes)">
+                                <option value="R1">R1 - Use as fuel or other means to generate energy</option>
+                                <option value="R2">R2 - Solvent reclamation/regeneration</option>
+                                <option value="R3">R3 - Recycling/reclamation of organic substances</option>
+                                <option value="R4">R4 - Recycling/reclamation of metals and metal compounds</option>
+                                <option value="R5">R5 - Recycling/reclamation of other inorganic materials</option>
+                                <option value="R6">R6 - Regeneration of acids or bases</option>
+                                <option value="R7">R7 - Recovery of components used for pollution abatement</option>
+                                <option value="R8">R8 - Recovery of components from catalysts</option>
+                                <option value="R9">R9 - Used oil re-refining or other reuses</option>
+                                <option value="R10">R10 - Land treatment resulting in benefit to agriculture</option>
+                                <option value="R11">R11 - Uses of residual materials from R1-R10 operations</option>
+                                <option value="R12">R12 - Exchange of wastes for submission to R1-R11</option>
+                                <option value="R13">R13 - Accumulation of material intended for operations</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="technology_employed">Technology employed:</label>
+                        <textarea id="technology_employed" name="technology_employed" rows="3" placeholder="Describe the specific technology or process that will be used"></textarea>
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="reason_export">Reason for export:</label>
+                        <textarea id="reason_export" name="reason_export" rows="3" placeholder="Explain why the waste is being exported for treatment"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 12: Designation and Composition of the Waste -->
+            <div class="form-section">
+                <div class="section-header">
+                    12. Designation and Composition of the Waste
+                </div>
+                <div class="section-content">
+                    <div class="field-group full-width">
+                        <label for="waste_designation">Waste designation (common name/commercial name):</label>
+                        <input type="text" id="waste_designation" name="waste_designation" required placeholder="e.g., Spent solvent mixture, Electronic waste components, Contaminated soil">
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="major_constituents">Major constituents and concentrations:</label>
+                        <textarea id="major_constituents" name="major_constituents" rows="4" required placeholder="List the main components with their approximate concentrations"></textarea>
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="hazardous_constituents">Hazardous constituents and concentrations:</label>
+                        <textarea id="hazardous_constituents" name="hazardous_constituents" rows="3" placeholder="Specify any hazardous components"></textarea>
+                    </div>
+                    <div class="field-group">
+                        <label>Chemical analysis available:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="analysis_yes" name="chemical_analysis" value="yes">
+                                <label for="analysis_yes">Yes - Analysis available</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="analysis_no" name="chemical_analysis" value="no">
+                                <label for="analysis_no">No - Based on process knowledge</label>
+                            </div>
+                        </div>
+                        <div class="field-group full-width" id="analysis_details" style="display: none; margin-top: 15px;">
+                            <label for="analysis_method">Analysis method and laboratory:</label>
+                            <textarea id="analysis_method" name="analysis_method" rows="2" placeholder="Describe analytical methods used and laboratory"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 13: Physical Characteristics -->
+            <div class="form-section">
+                <div class="section-header">
+                    13. Physical Characteristics
+                </div>
+                <div class="section-content">
+                    <div class="field-group full-width">
+                        <label>Physical state (select all that apply):</label>
+                        <div class="checkbox-group packaging-grid" style="margin-top: 10px;">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="powdery" name="physical_characteristics" value="1">
+                                <label for="powdery">1. Powdery/Powder</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="solid" name="physical_characteristics" value="2">
+                                <label for="solid">2. Solid</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="viscous" name="physical_characteristics" value="3">
+                                <label for="viscous">3. Viscous/Paste</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sludgy" name="physical_characteristics" value="4">
+                                <label for="sludgy">4. Sludgy</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="liquid" name="physical_characteristics" value="5">
+                                <label for="liquid">5. Liquid</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="gaseous" name="physical_characteristics" value="6">
+                                <label for="gaseous">6. Gaseous</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="other_physical" name="physical_characteristics" value="7">
+                                <label for="other_physical">7. Other (specify)</label>
+                            </div>
+                        </div>
+                        <div class="field-group full-width" id="other_physical_details" style="display: none; margin-top: 15px;">
+                            <label for="other_physical_specify">Other physical characteristics:</label>
+                            <input type="text" id="other_physical_specify" name="other_physical_specify" placeholder="Describe other physical characteristics">
+                        </div>
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="physical_description">Additional physical description:</label>
+                        <textarea id="physical_description" name="physical_description" rows="3" placeholder="Provide additional details about color, odor, consistency, particle size, etc."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 14: Waste Identification Codes -->
+            <div class="form-section">
+                <div class="section-header">
+                    14. Waste Identification (Fill in Relevant Codes)
+                </div>
+                <div class="section-content">
+                    <div class="field-group">
+                        <label for="basel_annex">Basel Annex VIII (or IX if applicable):</label>
+                        <input type="text" id="basel_annex" name="basel_annex" required placeholder="e.g., A1180, A3020, B1110">
+                    </div>
+                    <div class="field-group">
+                        <label for="oecd_code">OECD code (if different from Basel):</label>
+                        <input type="text" id="oecd_code" name="oecd_code" placeholder="e.g., GC010, GA160, GB040">
+                    </div>
+                    <div class="field-group">
+                        <label for="ec_list">EC list of wastes:</label>
+                        <input type="text" id="ec_list" name="ec_list" placeholder="e.g., 16 02 13*, 20 01 21*">
+                    </div>
+                    <div class="field-group">
+                        <label for="national_export">National code in country of export:</label>
+                        <input type="text" id="national_export" name="national_export" placeholder="Enter export country's national waste code">
+                    </div>
+                    <div class="field-group">
+                        <label for="national_import">National code in country of import:</label>
+                        <input type="text" id="national_import" name="national_import" placeholder="Enter import country's national waste code">
+                    </div>
+                    <div class="field-group">
+                        <label for="other_codes">Other codes (specify):</label>
+                        <input type="text" id="other_codes" name="other_codes" placeholder="Any other relevant classification codes">
+                    </div>
+                    <div class="field-group">
+                        <label for="y_code">Y-code:</label>
+                        <select id="y_code" name="y_code">
+                            <option value="">Select Y-code if applicable...</option>
+                            <option value="Y1">Y1 - Clinical wastes from medical care</option>
+                            <option value="Y2">Y2 - Wastes from pharmaceutical production</option>
+                            <option value="Y3">Y3 - Waste pharmaceuticals, drugs and medicines</option>
+                            <option value="Y4">Y4 - Wastes from production of biocides</option>
+                            <option value="Y5">Y5 - Wastes from production of wood preservatives</option>
+                            <option value="Y6">Y6 - Wastes from production/use of organic solvents</option>
+                            <option value="Y7">Y7 - Wastes from heat treatment operations containing cyanides</option>
+                            <option value="Y8">Y8 - Waste mineral oils unfit for their originally intended use</option>
+                            <option value="Y9">Y9 - Waste oils/water, hydrocarbons/water mixtures, emulsions</option>
+                            <option value="Y10">Y10 - Waste substances containing PCBs and/or PCTs</option>
+                            <option value="Y11">Y11 - Waste tarry residues from refining</option>
+                            <option value="Y12">Y12 - Wastes from production/use of inks, dyes, pigments</option>
+                            <option value="Y13">Y13 - Wastes from production/use of resins, latex, plasticizers</option>
+                            <option value="Y14">Y14 - Waste chemical substances from industrial/research activities</option>
+                            <option value="Y15">Y15 - Wastes of explosive nature</option>
+                            <option value="Y16">Y16 - Wastes from production/use of photographic chemicals</option>
+                            <option value="Y17">Y17 - Wastes resulting from surface treatment of metals/plastics</option>
+                            <option value="Y18">Y18 - Residues arising from industrial waste disposal operations</option>
+                            <option value="Y19">Y19 - Metal carbonyls</option>
+                            <option value="Y20">Y20 - Beryllium; beryllium compounds</option>
+                            <option value="Y21">Y21 - Hexavalent chromium compounds</option>
+                            <option value="Y22">Y22 - Copper compounds</option>
+                            <option value="Y23">Y23 - Zinc compounds</option>
+                            <option value="Y24">Y24 - Arsenic; arsenic compounds</option>
+                            <option value="Y25">Y25 - Selenium; selenium compounds</option>
+                            <option value="Y26">Y26 - Cadmium; cadmium compounds</option>
+                            <option value="Y27">Y27 - Antimony; antimony compounds</option>
+                            <option value="Y28">Y28 - Tellurium; tellurium compounds</option>
+                            <option value="Y29">Y29 - Mercury; mercury compounds</option>
+                            <option value="Y30">Y30 - Thallium; thallium compounds</option>
+                            <option value="Y31">Y31 - Lead; lead compounds</option>
+                            <option value="Y32">Y32 - Inorganic fluorine compounds excluding calcium fluoride</option>
+                            <option value="Y33">Y33 - Inorganic cyanides</option>
+                            <option value="Y34">Y34 - Acidic solutions or acids in solid form</option>
+                            <option value="Y35">Y35 - Basic solutions or bases in solid form</option>
+                            <option value="Y36">Y36 - Asbestos (dusts and fibres)</option>
+                            <option value="Y37">Y37 - Organic phosphorus compounds</option>
+                            <option value="Y38">Y38 - Organic cyanides</option>
+                            <option value="Y39">Y39 - Phenols; phenol compounds including chlorophenols</option>
+                            <option value="Y40">Y40 - Ethers</option>
+                            <option value="Y41">Y41 - Halogenated organic solvents</option>
+                            <option value="Y42">Y42 - Organic solvents excluding halogenated solvents</option>
+                            <option value="Y43">Y43 - Any material contaminated with congeners</option>
+                            <option value="Y44">Y44 - Halogenated or unhalogenated aromatic compounds</option>
+                            <option value="Y45">Y45 - Organohalogen compounds other than Y39-Y44</option>
+                            <option value="Y46">Y46 - Wastes collected from households</option>
+                            <option value="Y47">Y47 - Residues arising from incineration of household wastes</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label for="h_code">H-code (hazardous characteristics):</label>
+                        <select id="h_code" name="h_code" multiple style="height: 120px;">
+                            <option value="H1">H1 - Explosive</option>
+                            <option value="H3">H3 - Flammable liquids</option>
+                            <option value="H4.1">H4.1 - Flammable solids</option>
+                            <option value="H4.2">H4.2 - Substances liable to spontaneous combustion</option>
+                            <option value="H4.3">H4.3 - Substances which emit flammable gases in contact with water</option>
+                            <option value="H5.1">H5.1 - Oxidizing</option>
+                            <option value="H5.2">H5.2 - Organic peroxides</option>
+                            <option value="H6.1">H6.1 - Poisonous (acute)</option>
+                            <option value="H6.2">H6.2 - Infectious substances</option>
+                            <option value="H8">H8 - Corrosives</option>
+                            <option value="H10">H10 - Liberation of toxic gases in contact with air or water</option>
+                            <option value="H11">H11 - Toxic (delayed or chronic)</option>
+                            <option value="H12">H12 - Ecotoxic</option>
+                            <option value="H13">H13 - Capable of yielding another hazardous material</option>
+                        </select>
+                        <small style="color: #666; font-size: 12px; margin-top: 5px; display: block;">Hold Ctrl/Cmd to select multiple H-codes</small>
+                    </div>
+                    <div class="field-group">
+                        <label for="un_class">UN class:</label>
+                        <select id="un_class" name="un_class">
+                            <option value="">Select UN class if applicable...</option>
+                            <option value="1">Class 1 - Explosives</option>
+                            <option value="2.1">Class 2.1 - Flammable gases</option>
+                            <option value="2.2">Class 2.2 - Non-flammable, non-toxic gases</option>
+                            <option value="2.3">Class 2.3 - Toxic gases</option>
+                            <option value="3">Class 3 - Flammable liquids</option>
+                            <option value="4.1">Class 4.1 - Flammable solids</option>
+                            <option value="4.2">Class 4.2 - Spontaneously combustible substances</option>
+                            <option value="4.3">Class 4.3 - Dangerous when wet substances</option>
+                            <option value="5.1">Class 5.1 - Oxidizing substances</option>
+                            <option value="5.2">Class 5.2 - Organic peroxides</option>
+                            <option value="6.1">Class 6.1 - Toxic substances</option>
+                            <option value="6.2">Class 6.2 - Infectious substances</option>
+                            <option value="7">Class 7 - Radioactive materials</option>
+                            <option value="8">Class 8 - Corrosive substances</option>
+                            <option value="9">Class 9 - Miscellaneous dangerous substances</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label for="un_number">UN Number:</label>
+                        <input type="text" id="un_number" name="un_number" placeholder="e.g., UN1263, UN2810">
+                    </div>
+                    <div class="field-group">
+                        <label for="un_shipping_name">UN Shipping name:</label>
+                        <input type="text" id="un_shipping_name" name="un_shipping_name" placeholder="e.g., PAINT, TOXIC LIQUID, ORGANIC, N.O.S.">
+                    </div>
+                    <div class="field-group">
+                        <label for="customs_code">Customs code(s) (HS):</label>
+                        <input type="text" id="customs_code" name="customs_code" placeholder="e.g., 3825.10, 8549.99">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 15: Countries/States Concerned -->
+            <div class="form-section">
+                <div class="section-header">
+                    15. Countries/States Concerned, Competent Authorities, and Border Crossings
+                </div>
+                <div class="section-content">
+                    <div class="field-group">
+                        <label for="export_country">State of export - dispatch:</label>
+                        <input type="text" id="export_country" name="export_country" required placeholder="e.g., Trinidad and Tobago">
+                    </div>
+                    <div class="field-group">
+                        <label for="export_authority_code">Competent authority code (export):</label>
+                        <input type="text" id="export_authority_code" name="export_authority_code" placeholder="e.g., TT-CA-001">
+                    </div>
+                    <div class="field-group">
+                        <label for="export_border">Point of exit (border crossing or port):</label>
+                        <input type="text" id="export_border" name="export_border" placeholder="e.g., Port of Spain, Piarco International Airport">
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="transit_countries">State(s) of transit (entry and exit points):</label>
+                        <textarea id="transit_countries" name="transit_countries" rows="3" placeholder="List each transit country with entry and exit points"></textarea>
+                    </div>
+                    <div class="field-group">
+                        <label for="import_country">State of import - destination:</label>
+                        <input type="text" id="import_country" name="import_country" required placeholder="e.g., United States">
+                    </div>
+                    <div class="field-group">
+                        <label for="import_authority_code">Competent authority code (import):</label>
+                        <input type="text" id="import_authority_code" name="import_authority_code" placeholder="e.g., US-EPA-001">
+                    </div>
+                    <div class="field-group">
+                        <label for="import_border">Point of entry (border crossing or port):</label>
+                        <input type="text" id="import_border" name="import_border" placeholder="e.g., Port of Houston, Miami International Airport">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 16: Customs Offices (European Community) -->
+            <div class="form-section">
+                <div class="section-header">
+                    16. Customs Offices of Entry/Exit/Export (European Community)
+                </div>
+                <div class="section-content">
+                    <div class="field-group">
+                        <label for="customs_entry">Entry:</label>
+                        <input type="text" id="customs_entry" name="customs_entry" placeholder="EU customs office for entry">
+                    </div>
+                    <div class="field-group">
+                        <label for="customs_exit">Exit:</label>
+                        <input type="text" id="customs_exit" name="customs_exit" placeholder="EU customs office for exit">
+                    </div>
+                    <div class="field-group">
+                        <label for="customs_export">Export:</label>
+                        <input type="text" id="customs_export" name="customs_export" placeholder="EU customs office for export">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 17: Exporter's/Notifier's/Generator's Declaration -->
+            <div class="form-section">
+                <div class="section-header">
+                    17. Exporter's - Notifier's / Generator's - Producer's Declaration
+                </div>
+                <div class="section-content">
+                    <div class="field-group full-width">
+                        <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px; padding: 15px; margin-bottom: 20px;">
+                            <h4 style="margin-top: 0; color: #495057;">Declaration Statement:</h4>
+                            <p style="margin-bottom: 0; font-style: italic; color: #6c757d;">
+                                "I certify that the information is complete and correct to my best knowledge. I also certify that legally enforceable written contractual obligations have been entered into and that any applicable insurance or other financial guarantee is or shall be in force covering the transboundary movement."
+                            </p>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <label for="exporter_signatory_name">Exporter's - Notifier's name:</label>
+                        <input type="text" id="exporter_signatory_name" name="exporter_signatory_name" required placeholder="Full name of authorized signatory">
+                    </div>
+                    <div class="field-group">
+                        <label for="exporter_signature_date">Date:</label>
+                        <input type="date" id="exporter_signature_date" name="exporter_signature_date" required>
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="exporter_signature_note">Signature status:</label>
+                        <select id="exporter_signature_note" name="exporter_signature_note" required>
+                            <option value="">Select signature status...</option>
+                            <option value="signed">Physically signed</option>
+                            <option value="digital">Digitally signed</option>
+                            <option value="pending">Pending signature</option>
+                            <option value="authorized">Authorized representative</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label>Generator's signature required:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="generator_sig_yes" name="generator_signature_required" value="yes">
+                                <label for="generator_sig_yes">Yes - Generator signature required</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="generator_sig_no" name="generator_signature_required" value="no">
+                                <label for="generator_sig_no">No - Not required/Not practicable</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-group full-width" id="generator_signature_details" style="display: none; margin-top: 15px;">
+                        <div class="field-group">
+                            <label for="generator_signatory_name">Generator's - Producer's name:</label>
+                            <input type="text" id="generator_signatory_name" name="generator_signatory_name" placeholder="Full name of generator's authorized signatory">
+                        </div>
+                        <div class="field-group">
+                            <label for="generator_signature_date">Date:</label>
+                            <input type="date" id="generator_signature_date" name="generator_signature_date">
+                        </div>
+                        <div class="field-group">
+                            <label for="generator_signature_note">Signature status:</label>
+                            <select id="generator_signature_note" name="generator_signature_note">
+                                <option value="">Select signature status...</option>
+                                <option value="signed">Physically signed</option>
+                                <option value="digital">Digitally signed</option>
+                                <option value="pending">Pending signature</option>
+                                <option value="authorized">Authorized representative</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 18: Number of Annexes Attached -->
+            <div class="form-section">
+                <div class="section-header">
+                    18. Number of Annexes Attached
+                </div>
+                <div class="section-content">
+                    <div class="field-group">
+                        <label for="total_annexes">Total number of annexes attached:</label>
+                        <input type="number" id="total_annexes" name="total_annexes" min="0" value="0">
+                    </div>
+                    <div class="field-group full-width">
+                        <label for="annex_list">List of annexes and related sections:</label>
+                        <textarea id="annex_list" name="annex_list" rows="6" placeholder="List each annex with its reference to the relevant form section"></textarea>
+                    </div>
+                    <div class="field-group full-width">
+                        <label>Common annex types (select all that apply):</label>
+                        <div class="checkbox-group packaging-grid" style="margin-top: 10px;">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="annex_analysis" name="common_annexes" value="chemical_analysis">
+                                <label for="annex_analysis">Chemical analysis reports</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="annex_permits" name="common_annexes" value="facility_permits">
+                                <label for="annex_permits">Facility permits/licenses</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="annex_contracts" name="common_annexes" value="transport_contracts">
+                                <label for="annex_contracts">Transport contracts</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="annex_insurance" name="common_annexes" value="insurance">
+                                <label for="annex_insurance">Insurance certificates</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="annex_process" name="common_annexes" value="process_description">
+                                <label for="annex_process">Process descriptions</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="annex_safety" name="common_annexes" value="safety_data">
+                                <label for="annex_safety">Safety data sheets</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="annex_routing" name="common_annexes" value="routing_details">
+                                <label for="annex_routing">Detailed routing information</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="annex_emergency" name="common_annexes" value="emergency_procedures">
+                                <label for="annex_emergency">Emergency procedures</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="annex_other" name="common_annexes" value="other">
+                                <label for="annex_other">Other supporting documents</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+            <button type="button" class="btn btn-primary" onclick="loadSampleData()" style="background: #28a745; border: none;">
+                📋 Load Sample Data
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="resetForm()">Reset Form</button>
+            <button type="button" class="btn btn-primary" onclick="exportJSON()">Export JSON</button>
+        </div>
+    </div>
+
+    <script>
+        // Load Sample E-Waste Data Function
+        function loadSampleData() {
+            if (confirm('Load sample e-waste export data? This will populate all 18 sections with a realistic Caribbean to USA e-waste export scenario.')) {
+                
+                // Section 1: Exporter - Notifier
+                document.getElementById('exporter_reg').value = 'TT-2025-EWM-001';
+                document.getElementById('exporter_name').value = 'Caribbean Electronic Recovery Solutions Ltd';
+                document.getElementById('exporter_address').value = '45 Independence Square\nPort of Spain\nTrinidad and Tobago';
+                document.getElementById('exporter_contact').value = 'Maria Rodriguez, Environmental Manager';
+                document.getElementById('exporter_phone').value = '+1-868-625-4821';
+                document.getElementById('exporter_fax').value = '+1-868-625-4822';
+                document.getElementById('exporter_email').value = 'maria.rodriguez@caribbeanewaste.com';
+
+                // Section 2: Importer - Consignee
+                document.getElementById('importer_reg').value = 'EPA-ID-TXD123456789';
+                document.getElementById('importer_name').value = 'Advanced Materials Recovery International Inc';
+                document.getElementById('importer_address').value = '2500 Industrial Parkway\nHouston, TX 77032\nUnited States';
+                document.getElementById('importer_contact').value = 'James Mitchell, Operations Director';
+                document.getElementById('importer_phone').value = '+1-713-555-0147';
+                document.getElementById('importer_fax').value = '+1-713-555-0148';
+                document.getElementById('importer_email').value = 'j.mitchell@amri-recovery.com';
+
+                // Section 3: Notification Details
+                document.getElementById('notification_no').value = 'TT-2025-001-EW';
+                document.getElementById('individual_shipment').checked = true;
+                document.getElementById('recovery').checked = true;
+                document.getElementById('preconsent_no').checked = true;
+
+                // Section 4: Total Shipments
+                document.getElementById('total_shipments').value = '1';
+
+                // Section 5: Quantities
+                document.getElementById('quantity_tonnes').value = '12.5';
+                document.getElementById('quantity_cubic').value = '35.0';
+
+                // Section 6: Timing
+                const today = new Date();
+                const firstDep = new Date(today.getTime() + 45 * 24 * 60 * 60 * 1000); // 45 days from now
+                const lastDep = new Date(today.getTime() + 60 * 24 * 60 * 60 * 1000); // 60 days from now
+                document.getElementById('first_departure').value = firstDep.toISOString().split('T')[0];
+                document.getElementById('last_departure').value = lastDep.toISOString().split('T')[0];
+
+                // Section 7: Packaging
+                document.getElementById('box').checked = true;
+                document.getElementById('bulk').checked = true;
+                document.getElementById('special_handling_yes').checked = true;
+                document.getElementById('special_handling_specify').value = 'CRT monitors require lead glass handling protocols. Battery components need segregation and short-circuit prevention. ESD-sensitive components require anti-static packaging.';
+                document.getElementById('special_handling_details').style.display = 'block';
+
+                // Section 8: Carrier
+                document.getElementById('carrier_reg').value = 'TT-HAZ-2025-012';
+                document.getElementById('carrier_name').value = 'Caribbean International Logistics Ltd';
+                document.getElementById('carrier_address').value = 'Port of Spain Industrial Estate\nSea Lots, Port of Spain\nTrinidad and Tobago';
+                document.getElementById('carrier_contact').value = 'Carlos Fernandez, Hazmat Coordinator';
+                document.getElementById('carrier_phone').value = '+1-868-627-3401';
+                document.getElementById('carrier_fax').value = '+1-868-627-3402';
+                document.getElementById('carrier_email').value = 'carlos.fernandez@cariblogistics.com';
+                document.getElementById('transport_road').checked = true;
+                document.getElementById('transport_sea').checked = true;
+
+                // Section 9: Generator
+                document.getElementById('generator_reg').value = 'TT-GOV-2025-001';
+                document.getElementById('generator_name').value = 'Government of Trinidad and Tobago - Ministry of Digital Transformation';
+                document.getElementById('generator_address').value = 'Level 23-25, Tower C\nInternational Waterfront Centre\n#1 Wrightson Road, Port of Spain\nTrinidad and Tobago';
+                document.getElementById('generator_contact').value = 'Dr. Sarah Johnson, IT Infrastructure Manager';
+                document.getElementById('generator_phone').value = '+1-868-612-9500';
+                document.getElementById('generator_fax').value = '+1-868-612-9501';
+                document.getElementById('generator_email').value = 'sarah.johnson@digital.gov.tt';
+                document.getElementById('generation_site').value = 'Government IT infrastructure refresh program - End-of-life computers, monitors, and telecommunication equipment from various government offices and agencies across Trinidad and Tobago. Equipment includes desktop computers (5+ years old), CRT and LCD monitors, servers, networking equipment, and mobile devices no longer suitable for government use.';
+
+                // Section 10: Facility
+                document.getElementById('recovery_facility').checked = true;
+                document.getElementById('facility_reg').value = 'EPA-ID-TXD123456789';
+                document.getElementById('facility_name').value = 'Advanced Materials Recovery International Inc';
+                document.getElementById('facility_address').value = '2500 Industrial Parkway\nHouston, TX 77032\nUnited States';
+                document.getElementById('facility_contact').value = 'Dr. Robert Chen, Technical Director';
+                document.getElementById('facility_phone').value = '+1-713-555-0149';
+                document.getElementById('facility_fax').value = '+1-713-555-0150';
+                document.getElementById('facility_email').value = 'r.chen@amri-recovery.com';
+                document.getElementById('actual_site').value = 'Same as above - EPA-permitted electronic waste recovery facility with specialized equipment for precious metal recovery and component separation';
+
+                // Section 11: Operations
+                document.getElementById('operation_code').value = 'R4';
+                document.getElementById('technology_employed').value = 'Multi-stage electronic waste processing including: (1) Manual dismantling and component separation, (2) Mechanical shredding and magnetic separation, (3) Hydrometallurgical processing for precious metal recovery (Au, Ag, Pt), (4) Pyrometallurgical smelting for base metals (Cu, Al), (5) Plastic polymer recovery and recycling. Facility achieves >95% material recovery rate with zero landfill disposal.';
+                document.getElementById('reason_export').value = 'Trinidad and Tobago lacks specialized electronic waste processing infrastructure capable of recovering precious metals and rare earth elements. The receiving facility has EPA-approved technology for comprehensive e-waste recovery with superior environmental controls and material recovery rates compared to regional alternatives.';
+
+                // Section 12: Waste Designation
+                document.getElementById('waste_designation').value = 'Mixed Electronic Waste - Government IT Equipment End-of-Life';
+                document.getElementById('major_constituents').value = 'Desktop computers and components 40%, CRT monitors 25%, LCD displays 15%, Servers and networking equipment 10%, Mobile devices and peripherals 7%, Cables and accessories 3%. Estimated precious metal content: Gold 250g/tonne, Silver 2.5kg/tonne, Platinum group metals 50g/tonne.';
+                document.getElementById('hazardous_constituents').value = 'Lead in CRT glass: 15-25% by weight in monitor tubes, Mercury in LCD backlights: 3-5mg per unit, Cadmium in older batteries: <100ppm, PCBs in capacitors (pre-1979 equipment): <50ppm, Brominated flame retardants in plastic housings: 0.1-3%';
+                document.getElementById('analysis_yes').checked = true;
+                document.getElementById('analysis_method').value = 'Chemical analysis performed by Caribbean Environmental Laboratory Ltd using EPA Methods 3050B (metals digestion), 6010C (ICP-OES for metals), 8082A (PCB analysis). XRF screening for lead content in CRT glass. Analysis certificates dated March 2025 available as Annex 2.';
+                document.getElementById('analysis_details').style.display = 'block';
+
+                // Section 13: Physical Characteristics
+                document.getElementById('solid').checked = true;
+                document.getElementById('physical_description').value = 'Predominantly solid electronic equipment and components. Items range from small mobile devices to large CRT monitors. Equipment is in various states of disassembly - some units intact, others partially dismantled with components separated. CRT monitors have lead-glass tubes intact. No liquids present except small amounts of residual electrolytes in batteries.';
+
+                // Section 14: Waste Codes
+                document.getElementById('basel_annex').value = 'A1181';
+                document.getElementById('oecd_code').value = 'GC020';
+                document.getElementById('ec_list').value = '20 01 35*, 20 01 36, 16 02 13*';
+                document.getElementById('national_export').value = 'TT-EW-HAZ-01';
+                document.getElementById('national_import').value = 'US-EPA-EW-001';
+                document.getElementById('other_codes').value = 'R2 Standard Certification applicable';
+                document.getElementById('y_code').value = 'Y31';
+                
+                // H-codes (multiple selection)
+                const hCodeSelect = document.getElementById('h_code');
+                if (hCodeSelect) {
+                    // Clear previous selections
+                    for (let option of hCodeSelect.options) {
+                        option.selected = false;
+                    }
+                    // Select relevant H-codes
+                    for (let option of hCodeSelect.options) {
+                        if (option.value === 'H6.1' || option.value === 'H11' || option.value === 'H12') {
+                            option.selected = true;
+                        }
+                    }
+                }
+                
+                document.getElementById('un_class').value = '9';
+                document.getElementById('un_number').value = 'UN3077';
+                document.getElementById('un_shipping_name').value = 'ENVIRONMENTALLY HAZARDOUS SUBSTANCE, SOLID, N.O.S. (Electronic waste containing lead)';
+                document.getElementById('customs_code').value = '8549.99';
+
+                // Section 15: Countries
+                document.getElementById('export_country').value = 'Trinidad and Tobago';
+                document.getElementById('export_authority_code').value = 'TT-EMA-001';
+                document.getElementById('export_border').value = 'Port of Spain - Point Lisas Industrial Port';
+                document.getElementById('transit_countries').value = 'No transit countries - Direct sea route Port of Spain to Houston';
+                document.getElementById('import_country').value = 'United States';
+                document.getElementById('import_authority_code').value = 'US-EPA-R6-001';
+                document.getElementById('import_border').value = 'Port of Houston - Barbours Cut Container Terminal';
+
+                // Section 16: EU Customs (not applicable for this route)
+                document.getElementById('customs_entry').value = 'N/A - Non-EU route';
+                document.getElementById('customs_exit').value = 'N/A - Non-EU route';
+                document.getElementById('customs_export').value = 'N/A - Non-EU route';
+
+                // Section 17: Declarations
+                document.getElementById('exporter_signatory_name').value = 'Maria Rodriguez, Environmental Manager';
+                const signatureDate = new Date();
+                document.getElementById('exporter_signature_date').value = signatureDate.toISOString().split('T')[0];
+                document.getElementById('exporter_signature_note').value = 'pending';
+                document.getElementById('generator_sig_yes').checked = true;
+                document.getElementById('generator_signatory_name').value = 'Dr. Sarah Johnson, IT Infrastructure Manager';
+                document.getElementById('generator_signature_date').value = signatureDate.toISOString().split('T')[0];
+                document.getElementById('generator_signature_note').value = 'pending';
+                document.getElementById('generator_signature_details').style.display = 'block';
+
+                // Section 18: Annexes
+                document.getElementById('total_annexes').value = '7';
+                document.getElementById('annex_list').value = `Annex 1: Detailed Equipment Inventory and Serial Numbers (relates to Section 12)
+Annex 2: Chemical Analysis Reports - Caribbean Environmental Laboratory (relates to Section 12)
+Annex 3: EPA Facility Permits and R2 Certification - AMRI Houston (relates to Section 10)
+Annex 4: Transport Insurance Certificate - Caribbean International Logistics (relates to Section 8)
+Annex 5: Government IT Disposal Authorization - Ministry of Digital Transformation (relates to Section 9)
+Annex 6: Emergency Response and Spill Procedures for E-Waste Transport (relates to Section 8)
+Annex 7: Receiving Facility Processing Procedures and Material Recovery Documentation (relates to Section 11)`;
+                
+                // Check relevant annex types
+                document.getElementById('annex_analysis').checked = true;
+                document.getElementById('annex_permits').checked = true;
+                document.getElementById('annex_contracts').checked = true;
+                document.getElementById('annex_insurance').checked = true;
+                document.getElementById('annex_process').checked = true;
+                document.getElementById('annex_emergency').checked = true;
+
+                // Update progress
+                checkFormCompletion();
+                
+                alert('✅ Sample E-Waste Export Data Loaded Successfully!\n\nThis demonstrates a complete Basel notification for:\n\n📱 Mixed Government IT Equipment (12.5 tonnes)\n🇹🇹 Export: Trinidad & Tobago → 🇺🇸 USA\n⚠️ Classification: A1181 (Hazardous - Lead in CRT glass)\n♻️ Operation: R4 (Metal Recovery)\n🚢 Transport: Sea route via Port of Spain to Houston\n\nAll 18 sections are now populated with realistic, compliance-ready data following 2025 universal PIC requirements for e-waste.');
+            }
+        }
+
+        // Checkbox group management
+        function setupCheckboxGroups() {
+            // Single-selection checkbox groups (radio-like behavior)
+            const singleSelectGroups = [
+                'shipment_type',
+                'operation_type', 
+                'preconsent',
+                'special_handling',
+                'facility_type',
+                'chemical_analysis',
+                'generator_signature_required'
+            ];
+
+            singleSelectGroups.forEach(groupName => {
+                const checkboxes = document.querySelectorAll(`input[name="${groupName}"]`);
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        if (this.checked) {
+                            checkboxes.forEach(otherCheckbox => {
+                                if (otherCheckbox !== this) {
+                                    otherCheckbox.checked = false;
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+
+            // Setup conditional fields
+            setupConditionalFields();
+        }
+
+        // Setup conditional field visibility
+        function setupConditionalFields() {
+            // Show/hide "Other packaging" field
+            const otherPackagingCheckbox = document.getElementById('other_packaging');
+            const otherPackagingDetails = document.getElementById('other_packaging_details');
+            
+            if (otherPackagingCheckbox && otherPackagingDetails) {
+                otherPackagingCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        otherPackagingDetails.style.display = 'block';
+                        const specifyField = document.getElementById('other_packaging_specify');
+                        if (specifyField) specifyField.required = true;
+                    } else {
+                        otherPackagingDetails.style.display = 'none';
+                        const specifyField = document.getElementById('other_packaging_specify');
+                        if (specifyField) {
+                            specifyField.required = false;
+                            specifyField.value = '';
+                        }
+                    }
+                });
+            }
+
+            // Show/hide "Special handling details" field
+            const specialHandlingYes = document.getElementById('special_handling_yes');
+            const specialHandlingNo = document.getElementById('special_handling_no');
+            const specialHandlingDetails = document.getElementById('special_handling_details');
+            
+            if (specialHandlingYes && specialHandlingDetails) {
+                specialHandlingYes.addEventListener('change', function() {
+                    if (this.checked) {
+                        specialHandlingDetails.style.display = 'block';
+                        const specifyField = document.getElementById('special_handling_specify');
+                        if (specifyField) specifyField.required = true;
+                    }
+                });
+            }
+
+            if (specialHandlingNo && specialHandlingDetails) {
+                specialHandlingNo.addEventListener('change', function() {
+                    if (this.checked) {
+                        specialHandlingDetails.style.display = 'none';
+                        const specifyField = document.getElementById('special_handling_specify');
+                        if (specifyField) {
+                            specifyField.required = false;
+                            specifyField.value = '';
+                        }
+                    }
+                });
+            }
+
+            // Show/hide "Chemical analysis details" field
+            const analysisYes = document.getElementById('analysis_yes');
+            const analysisNo = document.getElementById('analysis_no');
+            const analysisDetails = document.getElementById('analysis_details');
+            
+            if (analysisYes && analysisDetails) {
+                analysisYes.addEventListener('change', function() {
+                    if (this.checked) {
+                        analysisDetails.style.display = 'block';
+                        const methodField = document.getElementById('analysis_method');
+                        if (methodField) methodField.required = true;
+                    }
+                });
+            }
+
+            if (analysisNo && analysisDetails) {
+                analysisNo.addEventListener('change', function() {
+                    if (this.checked) {
+                        analysisDetails.style.display = 'none';
+                        const methodField = document.getElementById('analysis_method');
+                        if (methodField) {
+                            methodField.required = false;
+                            methodField.value = '';
+                        }
+                    }
+                });
+            }
+
+            // Show/hide "Other physical characteristics" field
+            const otherPhysicalCheckbox = document.getElementById('other_physical');
+            const otherPhysicalDetails = document.getElementById('other_physical_details');
+            
+            if (otherPhysicalCheckbox && otherPhysicalDetails) {
+                otherPhysicalCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        otherPhysicalDetails.style.display = 'block';
+                        const specifyField = document.getElementById('other_physical_specify');
+                        if (specifyField) specifyField.required = true;
+                    } else {
+                        otherPhysicalDetails.style.display = 'none';
+                        const specifyField = document.getElementById('other_physical_specify');
+                        if (specifyField) {
+                            specifyField.required = false;
+                            specifyField.value = '';
+                        }
+                    }
+                });
+            }
+
+            // Show/hide "Generator signature details"
+            const generatorSigYes = document.getElementById('generator_sig_yes');
+            const generatorSigNo = document.getElementById('generator_sig_no');
+            const generatorSignatureDetails = document.getElementById('generator_signature_details');
+            
+            if (generatorSigYes && generatorSignatureDetails) {
+                generatorSigYes.addEventListener('change', function() {
+                    if (this.checked) {
+                        generatorSignatureDetails.style.display = 'block';
+                    }
+                });
+            }
+
+            if (generatorSigNo && generatorSignatureDetails) {
+                generatorSigNo.addEventListener('change', function() {
+                    if (this.checked) {
+                        generatorSignatureDetails.style.display = 'none';
+                        // Clear generator signature fields
+                        const nameField = document.getElementById('generator_signatory_name');
+                        const dateField = document.getElementById('generator_signature_date');
+                        const noteField = document.getElementById('generator_signature_note');
+                        if (nameField) nameField.value = '';
+                        if (dateField) dateField.value = '';
+                        if (noteField) noteField.value = '';
+                    }
+                });
+            }
+        }
+
+        // Form validation and progress tracking
+        function checkFormCompletion() {
+            const form = document.getElementById('baselForm');
+            const requiredFields = form.querySelectorAll('input[required], textarea[required], select[required]');
+            let completedFields = 0;
+
+            requiredFields.forEach(field => {
+                if (field.value && field.value.trim() !== '') {
+                    completedFields++;
+                }
+            });
+
+            const progressPercentage = (completedFields / requiredFields.length) * 100;
+            document.getElementById('progressFill').style.width = progressPercentage + '%';
+            document.getElementById('progressText').textContent = Math.round(progressPercentage) + '% Complete';
+        }
+
+        // Form export function
+        function exportJSON() {
+            const form = document.getElementById('baselForm');
+            const formData = new FormData(form);
+            const data = {};
+
+            // Get regular form fields
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+
+            // Handle checkbox groups
+            const singleCheckboxGroups = ['shipment_type', 'operation_type', 'preconsent', 'special_handling', 'facility_type', 'chemical_analysis', 'generator_signature_required'];
+            singleCheckboxGroups.forEach(groupName => {
+                const checkedBox = document.querySelector(`input[name="${groupName}"]:checked`);
+                if (checkedBox) {
+                    data[groupName] = checkedBox.value;
+                }
+            });
+
+            // Handle multiple-selection checkbox groups
+            const packagingTypes = [];
+            document.querySelectorAll('input[name="packaging_types"]:checked').forEach(checkbox => {
+                packagingTypes.push({
+                    code: checkbox.value,
+                    type: checkbox.nextElementSibling.textContent
+                });
+            });
+            data['packaging_types'] = packagingTypes;
+
+            const transportMeans = [];
+            document.querySelectorAll('input[name="transport_means"]:checked').forEach(checkbox => {
+                transportMeans.push({
+                    code: checkbox.value,
+                    description: checkbox.nextElementSibling.textContent
+                });
+            });
+            data['transport_means'] = transportMeans;
+
+            const physicalCharacteristics = [];
+            document.querySelectorAll('input[name="physical_characteristics"]:checked').forEach(checkbox => {
+                physicalCharacteristics.push({
+                    code: checkbox.value,
+                    description: checkbox.nextElementSibling.textContent
+                });
+            });
+            data['physical_characteristics'] = physicalCharacteristics;
+
+            const hCodeSelect = document.getElementById('h_code');
+            if (hCodeSelect) {
+                const selectedHCodes = Array.from(hCodeSelect.selectedOptions).map(option => ({
+                    code: option.value,
+                    description: option.textContent
+                }));
+                data['h_codes'] = selectedHCodes;
+            }
+
+            const commonAnnexes = [];
+            document.querySelectorAll('input[name="common_annexes"]:checked').forEach(checkbox => {
+                commonAnnexes.push(checkbox.value);
+            });
+            data['common_annexes'] = commonAnnexes;
+
+            // Add metadata
+            data['form_metadata'] = {
+                version: '1.0',
+                export_date: new Date().toISOString(),
+                total_sections: 18,
+                form_completion_percentage: Math.round(checkFormCompletion() || 0)
+            };
+
+            const jsonString = JSON.stringify(data, null, 2);
+            
+            // Create and download file
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `basel_notification_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Reset form function
+        function resetForm() {
+            if (confirm('Are you sure you want to reset all form data?')) {
+                document.getElementById('baselForm').reset();
+                // Hide conditional fields
+                document.getElementById('other_packaging_details').style.display = 'none';
+                document.getElementById('special_handling_details').style.display = 'none';
+                document.getElementById('analysis_details').style.display = 'none';
+                document.getElementById('other_physical_details').style.display = 'none';
+                document.getElementById('generator_signature_details').style.display = 'none';
+                checkFormCompletion();
+            }
+        }
+
+        // Initialize form
+        document.addEventListener('DOMContentLoaded', function() {
+            setupCheckboxGroups();
+            
+            // Add event listeners for progress tracking
+            const inputs = document.querySelectorAll('input, textarea, select');
+            inputs.forEach(input => {
+                input.addEventListener('input', checkFormCompletion);
+                input.addEventListener('change', checkFormCompletion);
+            });
+            
+            // Initial progress check
+            checkFormCompletion();
+            
+            // Set minimum date for departures (today)
+            const today = new Date().toISOString().split('T')[0];
+            const firstDeparture = document.getElementById('first_departure');
+            const lastDeparture = document.getElementById('last_departure');
+            if (firstDeparture) firstDeparture.min = today;
+            if (lastDeparture) lastDeparture.min = today;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "basel-compliance-app",
+  "version": "1.0.0",
+  "description": "Basel Convention Compliance Application - Multi-document hazardous waste notification system",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "install:all": "npm install && cd client && npm install && cd ../server && npm install",
+    "build": "cd client && npm run build && cd ../server && npm run build",
+    "start": "cd server && npm start"
+  },
+  "keywords": [
+    "basel-convention",
+    "compliance",
+    "hazardous-waste",
+    "notification"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
