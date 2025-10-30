@@ -66,7 +66,11 @@ if (config.nodeEnv === 'production') {
   app.use(express.static(clientBuildPath));
 
   // Handle React Router - send all non-API requests to index.html
-  app.get('*', (req, res) => {
+  app.get('*', (req, res, next) => {
+    // Skip API routes
+    if (req.path.startsWith('/api/')) {
+      return next();
+    }
     res.sendFile(path.join(clientBuildPath, 'index.html'));
   });
 }
