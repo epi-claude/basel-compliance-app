@@ -34,6 +34,12 @@ const corsOptions = config.nodeEnv === 'production'
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// Request logging middleware
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+});
+
 // Initialize database
 console.log('🔧 Initializing database...');
 try {
@@ -93,7 +99,13 @@ if (config.nodeEnv === 'production') {
     console.warn(`⚠️  Client build not found, using default: ${clientBuildPath}`);
   }
 
-  app.use(express.static(clientBuildPath));
+  // Serve static files but exclude API routes
+  app.use((req, res, next) => {
+    if (req.path.startsWith('/api/')) {
+      return next();
+    }
+    express.static(clientBuildPath)(req, res, next);
+  });
   console.log(`✅ Serving static files from: ${clientBuildPath}`);
 
   // Handle React Router - send all non-API requests to index.html
