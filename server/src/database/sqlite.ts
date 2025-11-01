@@ -2,24 +2,52 @@ import Database from 'better-sqlite3';
 import path from 'path';
 import fs from 'fs';
 
+console.log('🔍 Database initialization starting...');
+console.log('📍 Current directory:', process.cwd());
+console.log('📍 __dirname:', __dirname);
+
 const dbPath = process.env.DATABASE_PATH || path.join(__dirname, '../../database/dev.db');
+console.log('📍 Database path:', dbPath);
 
 // Ensure database directory exists
 const dbDir = path.dirname(dbPath);
-if (!fs.existsSync(dbDir)) {
-  fs.mkdirSync(dbDir, { recursive: true });
-  console.log(`📁 Created database directory: ${dbDir}`);
+console.log('📍 Database directory:', dbDir);
+
+try {
+  if (!fs.existsSync(dbDir)) {
+    console.log('📁 Creating database directory...');
+    fs.mkdirSync(dbDir, { recursive: true });
+    console.log(`✅ Created database directory: ${dbDir}`);
+  } else {
+    console.log(`✅ Database directory exists: ${dbDir}`);
+  }
+} catch (error) {
+  console.error('❌ Failed to create database directory:', error);
+  throw error;
 }
 
 // Initialize database
-export const db: Database.Database = new Database(dbPath);
+console.log('🔧 Creating database connection...');
+let db: Database.Database;
+try {
+  db = new Database(dbPath);
+  console.log('✅ Database connection established');
+} catch (error) {
+  console.error('❌ Failed to create database:', error);
+  throw error;
+}
+
+export { db };
 
 // Enable foreign keys
 db.pragma('foreign_keys = ON');
 
 // Initialize database schema
 export function initializeDatabase() {
-  const schema = `
+  console.log('🔧 Initializing database schema...');
+
+  try {
+    const schema = `
     -- ============================================================
     -- Users table
     -- ============================================================
@@ -299,12 +327,16 @@ export function initializeDatabase() {
     CREATE INDEX IF NOT EXISTS idx_documents_uploaded ON submission_documents(uploaded_at);
   `;
 
-  db.exec(schema);
-  console.log('✅ Database schema initialized - 4 tables created');
-  console.log('   - users');
-  console.log('   - submission_packages');
-  console.log('   - basel_notifications (115 fields)');
-  console.log('   - submission_documents');
+    db.exec(schema);
+    console.log('✅ Database schema initialized - 4 tables created');
+    console.log('   - users');
+    console.log('   - submission_packages');
+    console.log('   - basel_notifications (115 fields)');
+    console.log('   - submission_documents');
+  } catch (error) {
+    console.error('❌ Failed to initialize database schema:', error);
+    throw error;
+  }
 }
 
 export default db;
