@@ -8,7 +8,7 @@
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run dev",
     "install:all": "cd client && npm install && cd ../server && npm install",
-    "build": "cd client && npm install --production=false && npm run build && cd ../server && npm install --production=false && npm run build && echo 'Both client and server built successfully'",
+    "build": "echo '🧹 Cleaning old builds...' && rm -rf client/dist server/dist && echo '📦 Installing client dependencies...' && cd client && npm install --production=false && echo '🔨 Building client...' && npm run build && echo '✅ Client build complete' && cd ../server && echo '📦 Installing server dependencies...' && npm install --production=false && echo '🔨 Building server...' && npm run build && echo '✅ Server build complete' && echo '🎉 Both client and server built successfully'",
     "start": "cd server && npm start"
   },
   "keywords": [
