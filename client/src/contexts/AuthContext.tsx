@@ -58,7 +58,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Login function
   const login = async (username: string, password: string) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
+      const response = await fetch(`/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     organization?: string
   ) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
+      const response = await fetch(`/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -138,7 +138,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!token) return;
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/me`, {
+      const response = await fetch(`/api/auth/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
