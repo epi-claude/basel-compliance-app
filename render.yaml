@@ -11,4 +11,8 @@ services:
       - key: JWT_SECRET
         generateValue: true
       - key: DATABASE_PATH
-        value: ./database/production.db
+        value: /data/production.db
+    disk:
+      name: database-storage
+      mountPath: /data
+      sizeGB: 1
