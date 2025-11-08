@@ -105,7 +105,7 @@ export default function NotificationFormComplete({ packageId }: NotificationForm
       setIsGeneratingPDF(true);
 
       // Get the JWT token from localStorage
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('basel_auth_token');
 
       // Use fetch to get the PDF as a blob
       const response = await fetch(`/api/notifications/${notification.id}/generate-pdf`, {
