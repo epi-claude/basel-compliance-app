@@ -2,6 +2,7 @@ import { Response } from 'express';
 import { AuthRequest } from '../middleware/authMiddleware';
 import { BaselNotificationModel } from '../models/BaselNotification';
 import { SubmissionPackageModel } from '../models/SubmissionPackage';
+import { PDFService } from '../services/pdfService';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -244,6 +245,56 @@ export function loadTestData(req: AuthRequest, res: Response) {
     res.status(500).json({
       success: false,
       error: { message: error.message || 'Failed to load test data', code: 'SERVER_ERROR' },
+    });
+  }
+}
+
+/**
+ * Generate filled PDF for notification
+ * GET /api/notifications/:id/generate-pdf
+ */
+export async function generatePDF(req: AuthRequest, res: Response) {
+  try {
+    const { id } = req.params;
+    const userId = req.user!.id;
+
+    // Get notification
+    const notification = BaselNotificationModel.findById(id);
+
+    if (!notification) {
+      return res.status(404).json({
+        success: false,
+        error: { message: 'Notification not found', code: 'NOT_FOUND' },
+      });
+    }
+
+    // Check access
+    if (notification.created_by_user_id !== userId) {
+      return res.status(403).json({
+        success: false,
+        error: { message: 'Access denied', code: 'FORBIDDEN' },
+      });
+    }
+
+    console.log(`📄 Generating PDF for notification ${id}...`);
+
+    // Generate PDF
+    const pdfBuffer = await PDFService.fillBaselNotificationPDF(notification);
+
+    console.log(`✅ PDF generated successfully (${pdfBuffer.length} bytes)`);
+
+    // Set headers for PDF download
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="Basel_Notification_${id}.pdf"`);
+    res.setHeader('Content-Length', pdfBuffer.length);
+
+    // Send PDF
+    res.send(pdfBuffer);
+  } catch (error: any) {
+    console.error('❌ PDF generation error:', error);
+    res.status(500).json({
+      success: false,
+      error: { message: error.message || 'Failed to generate PDF', code: 'SERVER_ERROR' },
     });
   }
 }

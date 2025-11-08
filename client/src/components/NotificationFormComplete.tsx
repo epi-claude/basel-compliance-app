@@ -17,6 +17,7 @@ export default function NotificationFormComplete({ packageId }: NotificationForm
   const [notification, setNotification] = useState<BaselNotification | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [error, setError] = useState('');
   const [activeSection, setActiveSection] = useState(1);
@@ -94,6 +95,51 @@ export default function NotificationFormComplete({ packageId }: NotificationForm
       alert('Failed to load test data: ' + getErrorMessage(err));
     } finally {
       setIsSaving(false);
+    }
+  };
+
+  const handleGeneratePDF = async () => {
+    if (!notification) return;
+
+    try {
+      setIsGeneratingPDF(true);
+
+      // Get the JWT token from localStorage
+      const token = localStorage.getItem('token');
+
+      // Use fetch to get the PDF as a blob
+      const response = await fetch(`/api/notifications/${notification.id}/generate-pdf`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error?.message || 'Failed to generate PDF');
+      }
+
+      // Get the PDF blob
+      const blob = await response.blob();
+
+      // Create a download link
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `Basel_Notification_${notification.id}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+
+      // Cleanup
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+
+      alert('PDF generated successfully!');
+    } catch (err) {
+      alert('Failed to generate PDF: ' + getErrorMessage(err));
+    } finally {
+      setIsGeneratingPDF(false);
     }
   };
 
@@ -245,6 +291,13 @@ export default function NotificationFormComplete({ packageId }: NotificationForm
               className="px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Load Test Data
+            </button>
+            <button
+              onClick={handleGeneratePDF}
+              disabled={isGeneratingPDF}
+              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isGeneratingPDF ? 'Generating...' : 'Generate PDF'}
             </button>
             <div className="text-sm text-gray-500">
               {isSaving ? (

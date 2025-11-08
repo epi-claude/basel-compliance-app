@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "dev": "nodemon --exec ts-node src/server.ts",
-    "build": "tsc && cp -r src/test-data dist/",
+    "build": "tsc && cp -r src/test-data dist/ && cp -r src/pdf-templates dist/",
     "start": "node dist/server.js"
   },
   "keywords": [],
