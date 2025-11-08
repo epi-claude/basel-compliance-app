@@ -5,6 +5,7 @@ import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import PackagesPage from './pages/PackagesPage';
 import PackageDetailPage from './pages/PackageDetailPage';
+import SettingsPage from './pages/SettingsPage';
 
 // Protected route wrapper
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -79,6 +80,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <PackageDetailPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                <SettingsPage />
               </ProtectedRoute>
             }
           />

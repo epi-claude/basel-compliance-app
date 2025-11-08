@@ -64,10 +64,12 @@ app.get('/health', (req, res) => {
 import authRoutes from './routes/authRoutes';
 import packageRoutes from './routes/packageRoutes';
 import notificationRoutes from './routes/notificationRoutes';
+import userRoutes from './routes/userRoutes';
 
 app.use('/api/auth', authRoutes);
 app.use('/api/packages', packageRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/users', userRoutes);
 
 // Serve static files in production
 if (config.nodeEnv === 'production') {

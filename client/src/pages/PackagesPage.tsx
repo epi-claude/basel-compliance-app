@@ -124,6 +124,12 @@ export default function PackagesPage() {
               {user?.username}
             </span>
             <button
+              onClick={() => navigate('/settings')}
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md"
+            >
+              Settings
+            </button>
+            <button
               onClick={handleLogout}
               className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-md"
             >
