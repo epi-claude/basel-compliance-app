@@ -385,8 +385,607 @@ export function generateCustomPdfHtml(data: any): string {
     <div class="page-number">Page 1 of 4 - Executive Summary</div>
   </div>
 
-  <!-- Additional pages would continue with two-column detailed layout -->
-  <!-- For MVP, we'll keep this to page 1 only -->
+  <!-- PAGE 2: PARTIES -->
+  <div class="page">
+    <div class="header">
+      <h1>Basel Convention Notification</h1>
+      <div class="notification-id">${notificationId}</div>
+    </div>
+
+    <div class="two-column">
+      <!-- LEFT COLUMN -->
+      <div>
+        <div class="section">
+          <div class="section-title">1. Exporter/Notifier</div>
+          <div class="field">
+            <div class="field-label">Registration No.</div>
+            <div class="field-value">${escape(data['1_exporter_notifier_registration_no'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Name</div>
+            <div class="field-value">${escape(data['1_exporter_notifier_name'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Address</div>
+            <div class="field-value">${escape(data['1_exporter_notifier_address'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Contact Person</div>
+            <div class="field-value">${escape(data['1_exporter_notifier_contact_person'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Tel / Fax</div>
+            <div class="field-value">${escape(data['1_exporter_notifier_tel'])} / ${escape(data['1_exporter_notifier_fax'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Email</div>
+            <div class="field-value">${escape(data['1_exporter_notifier_email'])}</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">9. Waste Generator</div>
+          <div class="field">
+            <div class="field-label">Registration No.</div>
+            <div class="field-value">${escape(data['9_waste_generator_registration_no'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Name</div>
+            <div class="field-value">${escape(data['9_waste_generator_name'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Address</div>
+            <div class="field-value">${escape(data['9_waste_generator_address'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Contact Person</div>
+            <div class="field-value">${escape(data['9_waste_generator_contact_person'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Tel / Fax</div>
+            <div class="field-value">${escape(data['9_waste_generator_tel'])} / ${escape(data['9_waste_generator_fax'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Email</div>
+            <div class="field-value">${escape(data['9_waste_generator_email'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Site & Process</div>
+            <div class="field-value">${escape(data['9_waste_generator_site_process_generation'])}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+        <div class="section">
+          <div class="section-title">2. Importer/Consignee</div>
+          <div class="field">
+            <div class="field-label">Registration No.</div>
+            <div class="field-value">${escape(data['2_importer_consignee_registration_no'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Name</div>
+            <div class="field-value">${escape(data['2_importer_consignee_name'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Address</div>
+            <div class="field-value">${escape(data['2_importer_consignee_address'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Contact Person</div>
+            <div class="field-value">${escape(data['2_importer_consignee_contact_person'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Tel / Fax</div>
+            <div class="field-value">${escape(data['2_importer_consignee_tel'])} / ${escape(data['2_importer_consignee_fax'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Email</div>
+            <div class="field-value">${escape(data['2_importer_consignee_email'])}</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">10. Disposal/Recovery Facility</div>
+          <div class="field">
+            <div class="field-label">Type</div>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                ${checkbox(data['10_disposal_recovery_facility_type_disposal'])}
+                <span>Disposal</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['10_disposal_recovery_facility_type_recovery'])}
+                <span>Recovery</span>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Registration No.</div>
+            <div class="field-value">${escape(data['10_disposal_recovery_facility_registration_no'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Name</div>
+            <div class="field-value">${escape(data['10_disposal_recovery_facility_name'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Address</div>
+            <div class="field-value">${escape(data['10_disposal_recovery_facility_address'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Contact Person</div>
+            <div class="field-value">${escape(data['10_disposal_recovery_facility_contact_person'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Tel / Fax</div>
+            <div class="field-value">${escape(data['10_disposal_recovery_facility_tel'])} / ${escape(data['10_disposal_recovery_facility_fax'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Email</div>
+            <div class="field-value">${escape(data['10_disposal_recovery_facility_email'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Actual Site</div>
+            <div class="field-value">${escape(data['10_disposal_recovery_facility_actual_site'])}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-number">Page 2 of 4</div>
+  </div>
+
+  <!-- PAGE 3: WASTE & SHIPMENT DETAILS -->
+  <div class="page">
+    <div class="header">
+      <h1>Basel Convention Notification</h1>
+      <div class="notification-id">${notificationId}</div>
+    </div>
+
+    <div class="two-column">
+      <!-- LEFT COLUMN -->
+      <div>
+        <div class="section">
+          <div class="section-title">12. Waste Designation</div>
+          <div class="field">
+            <div class="field-label">Description</div>
+            <div class="field-value">${wasteDesignation}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Major Constituents & Concentrations</div>
+            <div class="field-value">${escape(data['12_waste_major_constituents_concentrations'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Hazardous Constituents & Concentrations</div>
+            <div class="field-value">${escape(data['12_waste_hazardous_constituents_concentrations'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Chemical Analysis Available</div>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                ${checkbox(data['12_waste_chemical_analysis_available_yes'])}
+                <span>Yes</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['12_waste_chemical_analysis_available_no'])}
+                <span>No</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">13. Physical Characteristics</div>
+          <div class="field">
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                ${checkbox(data['13_physical_characteristics_powdery'])}
+                <span>Powdery</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['13_physical_characteristics_solid'])}
+                <span>Solid</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['13_physical_characteristics_viscous'])}
+                <span>Viscous</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['13_physical_characteristics_sludgy'])}
+                <span>Sludgy</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['13_physical_characteristics_liquid'])}
+                <span>Liquid</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['13_physical_characteristics_gaseous'])}
+                <span>Gaseous</span>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Other</div>
+            <div class="field-value">${escape(data['13_physical_characteristics_other'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Additional Description</div>
+            <div class="field-value">${escape(data['13_physical_characteristics_additional_description'])}</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">11. Disposal/Recovery Operations</div>
+          <div class="field">
+            <div class="field-label">D Code / R Code</div>
+            <div class="field-value">${escape(data['11_disposal_recovery_operations_d_code_r_code'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Technology</div>
+            <div class="field-value">${escape(data['11_disposal_recovery_operations_technology'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Reason for Export</div>
+            <div class="field-value">${escape(data['11_disposal_recovery_operations_reason_export'])}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+        <div class="section">
+          <div class="section-title">3-6. Shipment Details</div>
+          <div class="field">
+            <div class="field-label">Shipment Type</div>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                ${checkbox(data['3_notification_details_individual_shipment'])}
+                <span>Individual</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['3_notification_details_multiple_shipments'])}
+                <span>Multiple</span>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Total Intended Shipments</div>
+            <div class="field-value">${escape(data['4_total_intended_shipments_count'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Total Quantity</div>
+            <div class="field-value">${escape(data['5_total_intended_quantity_tonnes'])} tonnes / ${escape(data['5_total_intended_quantity_m3'])} m³</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Intended Period</div>
+            <div class="field-value">First Departure: ${firstDeparture}<br>Last Departure: ${lastDeparture}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Pre-Consented Recovery Facility</div>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                ${checkbox(data['3_notification_details_pre_consented_recovery_facility_yes'])}
+                <span>Yes</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['3_notification_details_pre_consented_recovery_facility_no'])}
+                <span>No</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">7. Packaging Type</div>
+          <div class="field">
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                ${checkbox(data['7_packaging_type_drum'])}
+                <span>Drum</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['7_packaging_type_wooden_barrel'])}
+                <span>Wooden Barrel</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['7_packaging_type_jerrican'])}
+                <span>Jerrican</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['7_packaging_type_box'])}
+                <span>Box</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['7_packaging_type_bag'])}
+                <span>Bag</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['7_packaging_type_composite_packaging'])}
+                <span>Composite</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['7_packaging_type_pressure_receptacle'])}
+                <span>Pressure</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['7_packaging_type_bulk'])}
+                <span>Bulk</span>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Other</div>
+            <div class="field-value">${escape(data['7_packaging_type_other'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Special Handling Required</div>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                ${checkbox(data['7_special_handling_yes'])}
+                <span>Yes</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['7_special_handling_no'])}
+                <span>No</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">8. Intended Carrier</div>
+          <div class="field">
+            <div class="field-label">Registration No.</div>
+            <div class="field-value">${escape(data['8_intended_carrier_registration_no'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Name</div>
+            <div class="field-value">${escape(data['8_intended_carrier_name'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Address</div>
+            <div class="field-value">${escape(data['8_intended_carrier_address'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Contact Person</div>
+            <div class="field-value">${escape(data['8_intended_carrier_contact_person'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Tel / Fax</div>
+            <div class="field-value">${escape(data['8_intended_carrier_tel'])} / ${escape(data['8_intended_carrier_fax'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Email</div>
+            <div class="field-value">${escape(data['8_intended_carrier_email'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Means of Transport</div>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                ${checkbox(data['8_intended_carrier_means_road'])}
+                <span>Road</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['8_intended_carrier_means_train'])}
+                <span>Train</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['8_intended_carrier_means_sea'])}
+                <span>Sea</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['8_intended_carrier_means_air'])}
+                <span>Air</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['8_intended_carrier_means_inland_waterways'])}
+                <span>Inland</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-number">Page 3 of 4</div>
+  </div>
+
+  <!-- PAGE 4: CODES, ROUTES, ANNEXES -->
+  <div class="page">
+    <div class="header">
+      <h1>Basel Convention Notification</h1>
+      <div class="notification-id">${notificationId}</div>
+    </div>
+
+    <div class="two-column">
+      <!-- LEFT COLUMN -->
+      <div>
+        <div class="section">
+          <div class="section-title">14. Waste Identification</div>
+          <div class="field">
+            <div class="field-label">Basel Annex</div>
+            <div class="field-value">${escape(data['14_waste_identification_basel_annex'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">OECD Code</div>
+            <div class="field-value">${escape(data['14_waste_identification_oecd_code'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">EC List</div>
+            <div class="field-value">${escape(data['14_waste_identification_ec_list'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">National Code (Export)</div>
+            <div class="field-value">${escape(data['14_waste_identification_national_code_export'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">National Code (Import)</div>
+            <div class="field-value">${escape(data['14_waste_identification_national_code_import'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Y Code</div>
+            <div class="field-value">${escape(data['14_waste_identification_y_code'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">H Code</div>
+            <div class="field-value">${escape(data['14_waste_identification_h_code'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">UN Class</div>
+            <div class="field-value">${escape(data['14_waste_identification_un_class'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">UN Number</div>
+            <div class="field-value">${escape(data['14_waste_identification_un_number'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">UN Shipping Name</div>
+            <div class="field-value">${escape(data['14_waste_identification_un_shipping_name'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Customs Code</div>
+            <div class="field-value">${escape(data['14_waste_identification_customs_code'])}</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">15. Countries/States</div>
+          <div class="field">
+            <div class="field-label">Export State</div>
+            <div class="field-value">${escape(data['15_countries_states_export_state'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Export Authority Code</div>
+            <div class="field-value">${escape(data['15_countries_states_export_authority_code'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Point of Exit</div>
+            <div class="field-value">${escape(data['15_countries_states_export_point_exit'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">States of Transit</div>
+            <div class="field-value">${escape(data['15_countries_states_states_of_transit'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Import State</div>
+            <div class="field-value">${escape(data['15_countries_states_import_state'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Import Authority Code</div>
+            <div class="field-value">${escape(data['15_countries_states_import_authority_code'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Point of Entry</div>
+            <div class="field-value">${escape(data['15_countries_states_import_point_entry'])}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+        <div class="section">
+          <div class="section-title">16. Customs Offices</div>
+          <div class="field">
+            <div class="field-label">Entry Office</div>
+            <div class="field-value">${escape(data['16_customs_entry_office'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Exit Office</div>
+            <div class="field-value">${escape(data['16_customs_exit_office'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Export Office</div>
+            <div class="field-value">${escape(data['16_customs_export_office'])}</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">17. Exporter Declaration</div>
+          <div class="field">
+            <div class="field-label">Notifier Name</div>
+            <div class="field-value">${escape(data['17_exporter_declaration_notifier_name'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Date</div>
+            <div class="field-value">${declarationDate}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Signature Status</div>
+            <div class="field-value">${escape(data['17_exporter_declaration_signature_status'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Generator Signature</div>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                ${checkbox(data['17_exporter_declaration_generator_signature_yes'])}
+                <span>Yes</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['17_exporter_declaration_generator_signature_no'])}
+                <span>No</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">18. Annexes</div>
+          <div class="field">
+            <div class="field-label">Total Number Attached</div>
+            <div class="field-value">${escape(data['18_annexes_total_number_attached'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Types</div>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                ${checkbox(data['18_annexes_chemical_analysis_reports'])}
+                <span>Chemical Analysis</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['18_annexes_facility_permits'])}
+                <span>Facility Permits</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['18_annexes_transport_contracts'])}
+                <span>Transport</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['18_annexes_insurance_certificates'])}
+                <span>Insurance</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['18_annexes_process_descriptions'])}
+                <span>Process Docs</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['18_annexes_safety_data_sheets'])}
+                <span>Safety Sheets</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['18_annexes_routing_information'])}
+                <span>Routing</span>
+              </div>
+              <div class="checkbox-item">
+                ${checkbox(data['18_annexes_emergency_procedures'])}
+                <span>Emergency</span>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">List of Documents</div>
+            <div class="field-value">${escape(data['18_annexes_list'])}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Other Supporting Documents</div>
+            <div class="field-value">${escape(data['18_annexes_other_supporting_documents'])}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-number">Page 4 of 4</div>
+  </div>
 
 </body>
 </html>`;
