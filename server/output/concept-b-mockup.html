@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concept B: Two-Column Layout</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11pt;
+      line-height: 1.4;
+      background: #f0f0f0;
+      padding: 20px;
+    }
+
+    .page {
+      background: white;
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0 auto 20px;
+      padding: 0.75in;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      page-break-after: always;
+    }
+
+    .header {
+      text-align: center;
+      border-bottom: 3px solid #2563eb;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 18pt;
+      font-weight: bold;
+      color: #1e40af;
+      margin-bottom: 5px;
+    }
+
+    .header .notification-id {
+      font-size: 14pt;
+      font-weight: bold;
+      color: #333;
+      margin: 5px 0;
+    }
+
+    .header .scenario {
+      font-size: 11pt;
+      color: #666;
+      font-style: italic;
+    }
+
+    .key-info {
+      background: #eff6ff;
+      border: 2px solid #2563eb;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    }
+
+    .key-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .key-info-item {
+      display: flex;
+      gap: 8px;
+    }
+
+    .key-info-item strong {
+      color: #1e40af;
+      min-width: 80px;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 13pt;
+      font-weight: bold;
+      color: #1e40af;
+      background: #eff6ff;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      border-left: 4px solid #2563eb;
+    }
+
+    .field {
+      margin-bottom: 12px;
+    }
+
+    .field-label {
+      font-weight: bold;
+      color: #374151;
+      margin-bottom: 3px;
+      font-size: 10pt;
+    }
+
+    .field-value {
+      color: #000;
+      padding-left: 8px;
+      font-size: 11pt;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding-left: 8px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .checkbox {
+      width: 14px;
+      height: 14px;
+      border: 2px solid #666;
+      display: inline-block;
+      position: relative;
+    }
+
+    .checkbox.checked::after {
+      content: '✓';
+      position: absolute;
+      top: -3px;
+      left: 1px;
+      font-size: 14px;
+      color: #2563eb;
+      font-weight: bold;
+    }
+
+    .page-number {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 10pt;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1 -->
+  <div class="page">
+    <div class="header">
+      <h1>Basel Convention Notification</h1>
+      <div class="notification-id">CA-US-2024-BAT-001</div>
+      <div class="scenario">Hazardous Lead-Acid Battery Waste Export for Recycling</div>
+    </div>
+
+    <div class="key-info">
+      <div class="key-info-grid">
+        <div class="key-info-item">
+          <strong>Status:</strong>
+          <span>Draft</span>
+        </div>
+        <div class="key-info-item">
+          <strong>Operation:</strong>
+          <span>Recovery</span>
+        </div>
+        <div class="key-info-item">
+          <strong>Shipments:</strong>
+          <span>12 shipments</span>
+        </div>
+        <div class="key-info-item">
+          <strong>Quantity:</strong>
+          <span>480.5 tonnes / 650 m³</span>
+        </div>
+        <div class="key-info-item">
+          <strong>Period:</strong>
+          <span>02/15/2025 - 12/20/2025</span>
+        </div>
+        <div class="key-info-item">
+          <strong>Route:</strong>
+          <span>Canada → USA</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-column">
+      <!-- LEFT COLUMN -->
+      <div>
+        <div class="section">
+          <div class="section-title">1. Exporter/Notifier</div>
+          <div class="field">
+            <div class="field-label">Registration No.</div>
+            <div class="field-value">CA-ENV-2024-00123</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Name</div>
+            <div class="field-value">EcoWaste Management Inc.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Address</div>
+            <div class="field-value">1500 Industrial Parkway<br>Toronto, Ontario M5V 2T6<br>Canada</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Contact Person</div>
+            <div class="field-value">Sarah Chen</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Tel / Fax</div>
+            <div class="field-value">+1-416-555-0198 / +1-416-555-0199</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Email</div>
+            <div class="field-value">sarah.chen@ecowaste.ca</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">9. Waste Generator</div>
+          <div class="field">
+            <div class="field-label">Registration No.</div>
+            <div class="field-value">CA-ON-GEN-45678</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Name</div>
+            <div class="field-value">Automotive Battery Depot</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Address</div>
+            <div class="field-value">890 Auto Parts Road<br>Mississauga, Ontario L5B 3C3<br>Canada</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Contact Person</div>
+            <div class="field-value">David Park</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Tel / Fax</div>
+            <div class="field-value">+1-905-555-0456 / +1-905-555-0457</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Email</div>
+            <div class="field-value">d.park@autobattery.ca</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Site & Process</div>
+            <div class="field-value">Automotive service center collecting used lead-acid batteries from vehicle maintenance and replacement operations</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+        <div class="section">
+          <div class="section-title">2. Importer/Consignee</div>
+          <div class="field">
+            <div class="field-label">Registration No.</div>
+            <div class="field-value">US-EPA-2024-05678</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Name</div>
+            <div class="field-value">Battery Recycling Solutions LLC</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Address</div>
+            <div class="field-value">2800 Recycling Drive<br>Detroit, Michigan 48201<br>United States</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Contact Person</div>
+            <div class="field-value">Michael Rodriguez</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Tel / Fax</div>
+            <div class="field-value">+1-313-555-0287 / +1-313-555-0288</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Email</div>
+            <div class="field-value">m.rodriguez@batteryrecycling.com</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">10. Disposal/Recovery Facility</div>
+          <div class="field">
+            <div class="field-label">Type</div>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>Disposal</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Recovery</span>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Registration No.</div>
+            <div class="field-value">US-EPA-REC-12345</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Name</div>
+            <div class="field-value">Battery Recycling Solutions LLC - Detroit Facility</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Address</div>
+            <div class="field-value">2800 Recycling Drive<br>Detroit, Michigan 48201<br>United States</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Contact Person</div>
+            <div class="field-value">Dr. Emily Zhang</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Tel / Fax</div>
+            <div class="field-value">+1-313-555-0290 / +1-313-555-0291</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Email</div>
+            <div class="field-value">e.zhang@batteryrecycling.com</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Actual Site</div>
+            <div class="field-value">State-of-the-art battery recycling facility with acid neutralization, lead smelting, and plastic separation capabilities</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-number">Page 1 of 3</div>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page">
+    <div class="header">
+      <h1>Basel Convention Notification</h1>
+      <div class="notification-id">CA-US-2024-BAT-001</div>
+    </div>
+
+    <div class="two-column">
+      <!-- LEFT COLUMN -->
+      <div>
+        <div class="section">
+          <div class="section-title">12. Waste Designation</div>
+          <div class="field">
+            <div class="field-label">Description</div>
+            <div class="field-value">Used lead-acid batteries from automotive and industrial applications</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Major Constituents & Concentrations</div>
+            <div class="field-value">
+              Lead (Pb): 60-65%<br>
+              Sulfuric Acid (H2SO4): 15-20%<br>
+              Polypropylene plastic: 8-12%<br>
+              Water: 5-8%<br>
+              Other materials: 2-5%
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Hazardous Constituents & Concentrations</div>
+            <div class="field-value">
+              Lead (Pb): 60-65% - toxic heavy metal<br>
+              Sulfuric Acid (H2SO4): 15-20% - corrosive<br>
+              Arsenic (As): &lt;0.1% - trace amounts<br>
+              Antimony (Sb): 2-3% - alloying element
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Chemical Analysis Available</div>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Yes</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>No</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">13. Physical Characteristics</div>
+          <div class="field">
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>Powdery</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Solid</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>Viscous</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>Sludgy</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Liquid</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>Gaseous</span>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Other</div>
+            <div class="field-value">Intact batteries containing liquid acid electrolyte</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Additional Description</div>
+            <div class="field-value">Used lead-acid batteries in various states: some drained, some containing residual electrolyte. Batteries are segregated by type (automotive, industrial, motorcycle) and stored in acid-resistant containers</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">11. Disposal/Recovery Operations</div>
+          <div class="field">
+            <div class="field-label">D Code / R Code</div>
+            <div class="field-value">R4 - Recycling/reclamation of metals and metal compounds</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Technology</div>
+            <div class="field-value">Advanced pyrometallurgical process: Battery breaking and sorting, acid neutralization, lead smelting at 1200°C, plastic recovery, and secondary lead production meeting ASTM B29 specifications</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Reason for Export</div>
+            <div class="field-value">Specialized recycling facility with advanced environmental controls and higher recovery rates (98%) than available domestic options. Facility has RCRA permit and meets all EPA requirements for battery recycling</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+        <div class="section">
+          <div class="section-title">3-6. Shipment Details</div>
+          <div class="field">
+            <div class="field-label">Shipment Type</div>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>Individual</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Multiple</span>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Total Intended Shipments</div>
+            <div class="field-value">12</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Total Quantity</div>
+            <div class="field-value">480.5 tonnes / 650.0 m³</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Intended Period</div>
+            <div class="field-value">First Departure: 02/15/2025<br>Last Departure: 12/20/2025</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Pre-Consented Recovery Facility</div>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Yes</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>No</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">7. Packaging Type</div>
+          <div class="field">
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Drum</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>Wooden Barrel</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>Jerrican</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Box</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>Bag</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>Composite</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>Pressure Receptacle</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>Bulk</span>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Other</div>
+            <div class="field-value">Acid-resistant containers</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Special Handling Required</div>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Yes</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>No</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">8. Intended Carrier</div>
+          <div class="field">
+            <div class="field-label">Registration No.</div>
+            <div class="field-value">US-DOT-987654</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Name</div>
+            <div class="field-value">SafeHaul Transport Inc.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Address</div>
+            <div class="field-value">450 Transport Avenue<br>Buffalo, New York 14201<br>United States</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Contact Person</div>
+            <div class="field-value">James Wilson</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Tel / Fax</div>
+            <div class="field-value">+1-716-555-0345 / +1-716-555-0346</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Email</div>
+            <div class="field-value">j.wilson@safehaul.com</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Means of Transport</div>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Road</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>Train</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>Sea</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>Air</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>Inland Waterways</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-number">Page 2 of 3</div>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="page">
+    <div class="header">
+      <h1>Basel Convention Notification</h1>
+      <div class="notification-id">CA-US-2024-BAT-001</div>
+    </div>
+
+    <div class="two-column">
+      <!-- LEFT COLUMN -->
+      <div>
+        <div class="section">
+          <div class="section-title">14. Waste Identification</div>
+          <div class="field">
+            <div class="field-label">Basel Annex</div>
+            <div class="field-value">Annex VIII - A1160</div>
+          </div>
+          <div class="field">
+            <div class="field-label">OECD Code</div>
+            <div class="field-value">AA190</div>
+          </div>
+          <div class="field">
+            <div class="field-label">EC List</div>
+            <div class="field-value">16 06 01</div>
+          </div>
+          <div class="field">
+            <div class="field-label">National Code (Export)</div>
+            <div class="field-value">CA-HW-08</div>
+          </div>
+          <div class="field">
+            <div class="field-label">National Code (Import)</div>
+            <div class="field-value">US-EPA-D008</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Y Code</div>
+            <div class="field-value">Y31</div>
+          </div>
+          <div class="field">
+            <div class="field-label">H Code</div>
+            <div class="field-value">H6.1, H8</div>
+          </div>
+          <div class="field">
+            <div class="field-label">UN Class</div>
+            <div class="field-value">8</div>
+          </div>
+          <div class="field">
+            <div class="field-label">UN Number</div>
+            <div class="field-value">2794</div>
+          </div>
+          <div class="field">
+            <div class="field-label">UN Shipping Name</div>
+            <div class="field-value">Batteries, wet, filled with acid, electric storage</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Customs Code</div>
+            <div class="field-value">8548.10.10</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">15. Countries/States</div>
+          <div class="field">
+            <div class="field-label">Export State</div>
+            <div class="field-value">Canada</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Export Authority Code</div>
+            <div class="field-value">CA-ENV</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Point of Exit</div>
+            <div class="field-value">Fort Erie, Ontario</div>
+          </div>
+          <div class="field">
+            <div class="field-label">States of Transit</div>
+            <div class="field-value">None - direct transport from Canada to USA</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Import State</div>
+            <div class="field-value">United States of America</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Import Authority Code</div>
+            <div class="field-value">US-EPA</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Point of Entry</div>
+            <div class="field-value">Buffalo, New York</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+        <div class="section">
+          <div class="section-title">16. Customs Offices</div>
+          <div class="field">
+            <div class="field-label">Entry Office</div>
+            <div class="field-value">US Customs - Buffalo Port of Entry (Code: 0901)</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Exit Office</div>
+            <div class="field-value">Canada Border Services - Fort Erie (Code: 3501)</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Export Office</div>
+            <div class="field-value">Canada Border Services - Fort Erie (Code: 3501)</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">17. Exporter Declaration</div>
+          <div class="field">
+            <div class="field-label">Notifier Name</div>
+            <div class="field-value">Sarah Chen - Environmental Manager</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Date</div>
+            <div class="field-value">01/28/2025</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Signature Status</div>
+            <div class="field-value">Electronically signed via secure portal</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Generator Signature</div>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Yes</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox"></span>
+                <span>No</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">18. Annexes</div>
+          <div class="field">
+            <div class="field-label">Total Number Attached</div>
+            <div class="field-value">8</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Types</div>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Chemical Analysis</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Facility Permits</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Transport Contracts</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Insurance</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Process Descriptions</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Safety Data Sheets</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Routing Info</span>
+              </div>
+              <div class="checkbox-item">
+                <span class="checkbox checked"></span>
+                <span>Emergency Procedures</span>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">List of Documents</div>
+            <div class="field-value">
+              1. Chemical analysis report from certified lab<br>
+              2. US EPA RCRA permit for receiving facility<br>
+              3. Transport contract with SafeHaul Transport<br>
+              4. Insurance certificate ($5M liability coverage)<br>
+              5. Facility process flow diagram<br>
+              6. Safety Data Sheet for lead-acid batteries<br>
+              7. Route map and emergency response plan<br>
+              8. Generator site environmental permit
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Other Supporting Documents</div>
+            <div class="field-value">Generator environmental permit and compliance history</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-number">Page 3 of 3</div>
+  </div>
+
+</body>
+</html>

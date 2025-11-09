@@ -298,3 +298,53 @@ export async function generatePDF(req: AuthRequest, res: Response) {
     });
   }
 }
+
+/**
+ * Generate custom readable PDF for notification
+ * GET /api/notifications/:id/generate-custom-pdf
+ */
+export async function generateCustomPDF(req: AuthRequest, res: Response) {
+  try {
+    const { id } = req.params;
+    const userId = req.user!.id;
+
+    // Get notification
+    const notification = BaselNotificationModel.findById(id);
+
+    if (!notification) {
+      return res.status(404).json({
+        success: false,
+        error: { message: 'Notification not found', code: 'NOT_FOUND' },
+      });
+    }
+
+    // Check access
+    if (notification.created_by_user_id !== userId) {
+      return res.status(403).json({
+        success: false,
+        error: { message: 'Access denied', code: 'FORBIDDEN' },
+      });
+    }
+
+    console.log(`📄 Generating custom PDF for notification ${id}...`);
+
+    // Generate custom PDF
+    const pdfBuffer = await PDFService.generateCustomPDF(notification);
+
+    console.log(`✅ Custom PDF generated successfully (${pdfBuffer.length} bytes)`);
+
+    // Set headers for PDF download
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="Basel_Notification_Custom_${id}.pdf"`);
+    res.setHeader('Content-Length', pdfBuffer.length);
+
+    // Send PDF
+    res.send(pdfBuffer);
+  } catch (error: any) {
+    console.error('❌ Custom PDF generation error:', error);
+    res.status(500).json({
+      success: false,
+      error: { message: error.message || 'Failed to generate custom PDF', code: 'SERVER_ERROR' },
+    });
+  }
+}

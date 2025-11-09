@@ -1,4 +1,5 @@
 import { PDFDocument, PDFForm, PDFTextField, PDFCheckBox } from 'pdf-lib';
+import puppeteer from 'puppeteer';
 import fs from 'fs';
 import path from 'path';
 
@@ -149,5 +150,43 @@ export class PDFService {
   private static formatDate(month?: string, day?: string, year?: string): string {
     if (!month && !day && !year) return '';
     return `${month || ''}/${day || ''}/${year || ''}`.replace(/^\/|\/$/g, '');
+  }
+
+  /**
+   * Generate a custom readable PDF using the hybrid layout
+   */
+  static async generateCustomPDF(notificationData: any): Promise<Buffer> {
+    console.log('📄 Generating custom PDF with hybrid layout...');
+
+    const html = this.generateHybridHTML(notificationData);
+
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox']
+    });
+
+    try {
+      const page = await browser.newPage();
+      await page.setContent(html, { waitUntil: 'networkidle0' });
+
+      const pdfBuffer = await page.pdf({
+        format: 'Letter',
+        printBackground: true,
+        margin: { top: 0, right: 0, bottom: 0, left: 0 }
+      });
+
+      console.log('✅ Custom PDF generated successfully');
+      return Buffer.from(pdfBuffer);
+    } finally {
+      await browser.close();
+    }
+  }
+
+  /**
+   * Generate HTML for the hybrid layout
+   */
+  private static generateHybridHTML(data: any): string {
+    const { generateCustomPdfHtml } = require('../templates/customPdfTemplate');
+    return generateCustomPdfHtml(data);
   }
 }

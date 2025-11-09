@@ -18,6 +18,7 @@ export default function NotificationFormComplete({ packageId }: NotificationForm
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
+  const [isGeneratingCustomPDF, setIsGeneratingCustomPDF] = useState(false);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [error, setError] = useState('');
   const [activeSection, setActiveSection] = useState(1);
@@ -140,6 +141,51 @@ export default function NotificationFormComplete({ packageId }: NotificationForm
       alert('Failed to generate PDF: ' + getErrorMessage(err));
     } finally {
       setIsGeneratingPDF(false);
+    }
+  };
+
+  const handleGenerateCustomPDF = async () => {
+    if (!notification) return;
+
+    try {
+      setIsGeneratingCustomPDF(true);
+
+      // Get the JWT token from localStorage
+      const token = localStorage.getItem('basel_auth_token');
+
+      // Use fetch to get the PDF as a blob
+      const response = await fetch(`/api/notifications/${notification.id}/generate-custom-pdf`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error?.message || 'Failed to generate custom PDF');
+      }
+
+      // Get the PDF blob
+      const blob = await response.blob();
+
+      // Create a download link
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `Basel_Notification_Custom_${notification.id}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+
+      // Cleanup
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+
+      alert('Custom PDF generated successfully!');
+    } catch (err) {
+      alert('Failed to generate custom PDF: ' + getErrorMessage(err));
+    } finally {
+      setIsGeneratingCustomPDF(false);
     }
   };
 
@@ -298,6 +344,13 @@ export default function NotificationFormComplete({ packageId }: NotificationForm
               className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isGeneratingPDF ? 'Generating...' : 'Generate PDF'}
+            </button>
+            <button
+              onClick={handleGenerateCustomPDF}
+              disabled={isGeneratingCustomPDF}
+              className="px-4 py-2 text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isGeneratingCustomPDF ? 'Generating...' : 'Generate Custom PDF'}
             </button>
             <div className="text-sm text-gray-500">
               {isSaving ? (

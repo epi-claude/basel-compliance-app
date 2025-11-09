@@ -6,6 +6,7 @@ import {
   autoSaveNotification,
   loadTestData,
   generatePDF,
+  generateCustomPDF,
 } from '../controllers/notificationController';
 import { authMiddleware } from '../middleware/authMiddleware';
 
@@ -21,5 +22,6 @@ router.put('/:id', updateNotification);
 router.patch('/:id/autosave', autoSaveNotification);
 router.post('/:id/load-test-data', loadTestData);
 router.get('/:id/generate-pdf', generatePDF);
+router.get('/:id/generate-custom-pdf', generateCustomPDF);
 
 export default router;
