@@ -81,20 +81,43 @@ openssl rand -base64 32
 node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 ```
 
-## Step 4: Add Persistent Storage (Important!)
+## Step 4: Add Persistent Storage (CRITICAL!)
 
-Railway deployments are ephemeral by default. To persist the SQLite database:
+Railway deployments have an **ephemeral filesystem** by default. This means:
+- ⚠️ **Any data stored outside of a volume will be DELETED on every deployment**
+- ⚠️ **User accounts, packages, and notifications will be LOST without proper configuration**
 
-1. In your Railway service, go to "Settings" tab
-2. Scroll to "Volumes" section
-3. Click "New Volume"
-4. Set mount path: `/data`
-5. Set size: 1GB (adjust as needed)
-6. Click "Add"
+### To persist the SQLite database:
 
-**CRITICAL:** Make sure the `DATABASE_PATH` environment variable is set to `/data/production.db` to match the volume mount path.
+1. In your Railway service dashboard, go to **"Settings"** tab
+2. Scroll down to **"Volumes"** section
+3. Click **"+ New Volume"**
+4. Configure the volume:
+   - **Mount Path:** `/data`
+   - **Size:** 1GB (can be increased later if needed)
+5. Click **"Add"**
 
-This ensures your database survives redeployments.
+### Verify Volume Configuration:
+
+After creating the volume, you should see it listed under Volumes:
+```
+Volume: [generated-volume-id]
+Mount Path: /data
+Size: 1GB
+```
+
+### Set Environment Variable:
+
+Make absolutely sure the `DATABASE_PATH` environment variable matches the volume mount path:
+
+**Variables tab → Add variable:**
+```
+DATABASE_PATH=/data/production.db
+```
+
+**The volume mount path (`/data`) and DATABASE_PATH must match EXACTLY.**
+
+Without this configuration, your database will be recreated on every deployment, requiring you to create new accounts each time.
 
 ## Step 5: Verify Deployment
 
@@ -124,6 +147,17 @@ This ensures your database survives redeployments.
 - **API Routes**: All API calls go to `/api/*` endpoints
 - **Database**: SQLite database stored in persistent volume
 - **Port**: Application listens on PORT environment variable (Railway assigns this)
+- **PDF Generation**: Uses Puppeteer with system Chromium (configured via `nixpacks.toml`)
+
+### Custom PDF Feature (Puppeteer)
+
+The "Generate Custom PDF" feature requires Chromium and its dependencies to be installed in the Railway environment. This is handled automatically through:
+
+1. **nixpacks.toml** - Installs Chromium and required system libraries
+2. **Puppeteer Configuration** - Uses system Chromium instead of downloading Chrome
+3. **Production Settings** - Optimized browser args for Railway's containerized environment
+
+If you see errors like `Failed to launch the browser process: Code: 127` or missing library errors, the `nixpacks.toml` configuration should resolve them automatically on the next deployment.
 
 ## Build Process
 
@@ -171,6 +205,36 @@ If database isn't persisting across deployments:
 - Verify `DATABASE_PATH` environment variable is set to `/data/production.db`
 - Check logs for database initialization messages
 - The volume and DATABASE_PATH **must** match exactly
+
+**Symptoms of missing volume:**
+- Users/accounts disappear after each deployment
+- "Create account" page appears even though you registered before
+- All packages and notifications are lost
+
+**Solution:**
+1. Go to Settings → Volumes
+2. Add a new volume with mount path `/data`
+3. Redeploy the service
+
+### Custom PDF Generation Issues
+
+If "Generate Custom PDF" fails with browser/library errors:
+
+**Error: `Failed to launch the browser process: Code: 127`**
+- **Cause**: Chromium dependencies not installed
+- **Solution**: The `nixpacks.toml` file should install these automatically. Trigger a new deployment to apply the configuration.
+
+**Error: `libglib-2.0.so.0: cannot open shared object file`**
+- **Cause**: Missing system libraries for Chromium
+- **Solution**: Verify `nixpacks.toml` exists in project root and contains the apt packages configuration. Redeploy.
+
+**Steps to fix:**
+1. Verify `nixpacks.toml` exists in your repository root (not in server/ folder)
+2. Check Railway build logs for "Installing apt packages" message
+3. If nixpacks.toml was just added, trigger a manual redeploy
+4. Check logs for successful Chromium installation
+
+**Note**: The regular "Generate PDF" button (blue) works fine without Chromium - only the "Generate Custom PDF" (purple) requires these dependencies.
 
 ### CORS Issues
 
